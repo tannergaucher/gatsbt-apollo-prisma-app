@@ -27,9 +27,10 @@ const Query = {
     const userId = verify(token, APP_SECRET).userId
 
     if (!userId) {
-      return null
+      throw new Error(`You must be logged in for that`)
     }
 
+    // error:  cannot return null?
     return context.prisma.user({ id: userId }).events()
   },
 

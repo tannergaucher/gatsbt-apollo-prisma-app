@@ -64,7 +64,7 @@ const Mutation = {
     const userId = verify(token, APP_SECRET).userId
 
     if (!userId) {
-      return null
+      throw new Error(`You must be logged in for that`)
     }
 
     // update related nodes type User and Type Event
