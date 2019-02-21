@@ -21,10 +21,7 @@ const server = createServer
 server.express.use(cookieParser())
 
 server.express.use((req, res, next) => {
-  res.header(
-    'Access-Control-Allow-Origin',
-    'https://wizardly-panini-484141.netlify.com/'
-  )
+  res.header('Access-Control-Allow-Origin', '*')
   next()
 })
 
