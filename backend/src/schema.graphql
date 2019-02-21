@@ -1,0 +1,37 @@
+scalar DateTime
+
+type SuccessMessage {
+  message: String
+}
+
+type Query {
+  me: User
+  events: [Event!]!
+  isGoing(eventId: Int): Boolean
+}
+
+type Mutation {
+  signup(email: String!, password: String!, name: String): AuthPayload!
+  signin(email: String!, password: String!): AuthPayload!
+  signout: SuccessMessage
+  addEvent(eventId: Int!): User
+  removeEvent(eventId: Int!): User
+}
+
+type AuthPayload {
+  token: String!
+  user: User!
+}
+
+type Event {
+  # b.c. id namespace is rserved for type ID
+  eventId: Int!
+}
+
+type User {
+  id: ID!
+  email: String!
+  password: String!
+  name: String
+  events: [Event!]!
+}
