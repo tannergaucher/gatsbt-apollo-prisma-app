@@ -5,7 +5,7 @@ import fetch from 'isomorphic-fetch'
 import { createHttpLink } from 'apollo-link-http'
 
 const link = createHttpLink({
-  uri: 'https://heroku-demo-4bfe75293e.herokuapp.com/backend/dev',
+  uri: 'https://gatsby-apollo-prisma-demo.herokuapp.com/',
   credentials: 'include',
 })
 
