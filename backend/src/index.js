@@ -20,16 +20,12 @@ const server = createServer
 
 server.express.use(cookieParser())
 
-server.express.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*')
-  next()
-})
-
 server.start(
   {
     cors: {
       credentials: true,
-      origin: process.env.FRONTEND_URL_PRODUCTION,
+      origin: 'https://wizardly-panini-484141.netlify.com/',
+      // origin: process.env.FRONTEND_URL_PRODUCTION,
     },
   },
   details => {
