@@ -21,7 +21,7 @@ const Query = {
   events: async (parent, args, context) => {
     const { token } = context.request.cookies
     if (!token) {
-      return null
+      throw new Error(`You must be logged in for that`)
     }
 
     const userId = verify(token, APP_SECRET).userId
