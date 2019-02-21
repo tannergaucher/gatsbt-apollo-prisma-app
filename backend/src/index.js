@@ -24,7 +24,7 @@ server.start(
   {
     cors: {
       credentials: true,
-      origin: 'http://localhost:8000',
+      origin: process.env.FRONTEND_URL_PRODUCTION,
     },
   },
   details => {

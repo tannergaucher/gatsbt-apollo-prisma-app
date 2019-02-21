@@ -1,6 +1,5 @@
 # Specifies the HTTP endpoint of your Prisma API.
 #endpoint: ''
-#endpoint: ''
 endpoint: https://heroku-demo-4bfe75293e.herokuapp.com/backend/dev
 
 # Defines your models, each model is mapped to the database as a table.
@@ -16,3 +15,4 @@ hooks:
   post-deploy:
     - prisma generate
 # Seeds initial data into the database by running a script.
+
