@@ -14,6 +14,7 @@ const Mutation = {
 
     const token = sign({ userId: user.id }, APP_SECRET)
 
+    //change to local storage
     context.response.cookie('token', token, {
       httpOnly: true,
       maxAge: 1000 * 60 * 60 * 24 * 365,
