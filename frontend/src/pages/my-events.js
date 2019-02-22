@@ -33,8 +33,6 @@ const myEvents = ({ data }) => {
             // 2. map all events from page query, if userEventsArray.indexOf event !== -1, push to isUserEventNode array
             const isUserEventNode = []
             allEvents.map(edge => {
-              console.log(eventIds.indexOf(edge.node.frontmatter.id))
-
               if (eventIds.indexOf(edge.node.frontmatter.id) !== -1) {
                 isUserEventNode.push(edge)
               }

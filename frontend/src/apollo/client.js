@@ -13,4 +13,10 @@ export const client = new ApolloClient({
   fetch,
   link,
   cache: new InMemoryCache(),
+  clientState: {
+    resolvers: {
+      Mutation: {},
+      Query: {},
+    },
+  },
 })
