@@ -5,7 +5,7 @@ const { resolvers } = require('./resolvers')
 
 require('dotenv').config()
 
-const createServer = new GraphQLServer({
+const server = new GraphQLServer({
   typeDefs: 'src/schema.graphql',
   resolvers,
   context: request => {
@@ -16,19 +16,15 @@ const createServer = new GraphQLServer({
   },
 })
 
-const server = createServer
-
 server.express.use(cookieParser())
 
 server.start(
   {
     cors: {
       credentials: true,
-      origin: 'https://wizardly-panini-484141.netlify.com',
-      // origin: process.env.FRONTEND_URL_PRODUCTION,
+      origin: 'http://localhost:8000',
     },
   },
-  details => {
-    console.log(`Server is running on http://localhost:${details.port}`)
-  }
+
+  () => console.log(`server is now running on port http://localhost:4000`)
 )

@@ -16,6 +16,6 @@ var models = [
 exports.Prisma = prisma_lib_1.makePrismaClientClass({
   typeDefs,
   models,
-  endpoint: `https://heroku-demo-4bfe75293e.herokuapp.com/backend/dev`
+  endpoint: `https://us1.prisma.sh/tanner-gaucher/localStorageAuth/dev`
 });
 exports.prisma = new exports.Prisma();

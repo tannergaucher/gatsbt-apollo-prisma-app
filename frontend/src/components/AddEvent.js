@@ -2,7 +2,6 @@ import React from 'react'
 import { Mutation } from 'react-apollo'
 import gql from 'graphql-tag'
 
-import { IS_GOING_QUERY } from './Event'
 import { MY_EVENTS_QUERY } from '../pages/events'
 
 const ADD_EVENT_MUTATION = gql`
@@ -24,19 +23,8 @@ const AddEvent = ({ eventId }) => {
     <Mutation
       mutation={ADD_EVENT_MUTATION}
       variables={{ eventId }}
-      // optimisticResponse={{
-      //   __typename: 'Mutation',
-      //   addEvent: {
-      //     __typename: 'User',
-      //     content: eventId,
-      //     id: new Date(),
-      //   },
-      // }}
       update={update}
-      refetchQueries={[
-        { query: IS_GOING_QUERY, variables: { eventId } },
-        { query: MY_EVENTS_QUERY },
-      ]}
+      refetchQueries={[{ query: MY_EVENTS_QUERY }]}
     >
       {addEvent => <button onClick={addEvent}>Add</button>}
     </Mutation>

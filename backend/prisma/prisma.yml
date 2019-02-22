@@ -1,6 +1,6 @@
 # Specifies the HTTP endpoint of your Prisma API.
 #endpoint: ''
-endpoint: https://heroku-demo-4bfe75293e.herokuapp.com/backend/dev
+endpoint: https://us1.prisma.sh/tanner-gaucher/localStorageAuth/dev
 
 # Defines your models, each model is mapped to the database as a table.
 datamodel: datamodel.prisma

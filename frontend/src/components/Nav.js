@@ -6,10 +6,12 @@ import Signout from '../components/Signout'
 
 import { CURRENT_USER_QUERY } from '../components/User'
 
-const style = {
-  display: 'flex',
-  justifyContent: 'space-between',
-}
+// toggle sign out / sign in
+
+// read isSignedIn bool from @client local state
+
+// if true, display: sign out
+// if false, display sign in
 
 const Nav = ({ title }) => (
   <div style={style}>
@@ -19,27 +21,19 @@ const Nav = ({ title }) => (
     <Link to="/my-events">
       <h4>My events</h4>
     </Link>
-    <Query query={CURRENT_USER_QUERY}>
-      {({ data, loading, error }) => {
-        if (loading) return <p>loading</p>
-        if (error) return <p>{error.message}</p>
-        if (!data.me) {
-          return (
-            <Link to="/signin">
-              <h4>Sign in</h4>
-            </Link>
-          )
-        }
 
-        return (
-          <>
-            <Signout name={data.me.name} />
-          </>
-        )
-      }}
-    </Query>
+    <Link to="/signin">
+      <h4>Sign in</h4>
+    </Link>
+
+    <Signout />
   </div>
 )
 
 export default Nav
 export { CURRENT_USER_QUERY }
+
+const style = {
+  display: 'flex',
+  justifyContent: 'space-between',
+}

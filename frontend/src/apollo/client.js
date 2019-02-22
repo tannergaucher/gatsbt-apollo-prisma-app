@@ -2,10 +2,10 @@ import { ApolloClient } from 'apollo-client'
 import { InMemoryCache } from 'apollo-cache-inmemory'
 
 import fetch from 'isomorphic-fetch'
-import { createHttpLink } from 'apollo-link-http'
+import { HttpLink } from 'apollo-link-http'
 
-const link = createHttpLink({
-  uri: 'https://gatsby-apollo-prisma-demo.herokuapp.com/',
+const link = new HttpLink({
+  uri: 'http://localhost:4000',
   credentials: 'include',
 })
 
@@ -17,6 +17,9 @@ export const client = new ApolloClient({
     resolvers: {
       Mutation: {},
       Query: {},
+    },
+    data: {
+      isLoggedIn: false,
     },
   },
 })

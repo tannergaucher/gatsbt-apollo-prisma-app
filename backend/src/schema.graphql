@@ -7,7 +7,6 @@ type SuccessMessage {
 type Query {
   me: User
   events: [Event!]!
-  isGoing(eventId: Int): Boolean
 }
 
 type Mutation {
