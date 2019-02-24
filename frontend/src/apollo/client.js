@@ -28,8 +28,7 @@ export const client = new ApolloClient({
   typeDefs,
 })
 
-// this is the 'default' client state here
-
+// this is the 'default' client state
 cache.writeData({
   data: {
     isLoggedIn: !!getToken(),
