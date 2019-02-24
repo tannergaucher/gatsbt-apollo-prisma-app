@@ -17,6 +17,7 @@ const Signout = ({ name }) => {
       mutation={SIGN_OUT_MUTATION}
       onCompleted={({ signout }) => {
         client.writeData({ data: { isLoggedIn: false } })
+        localStorage.clear()
       }}
     >
       {signout => <button onClick={signout}>Sign out {name}</button>}

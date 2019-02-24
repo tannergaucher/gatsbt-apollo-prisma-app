@@ -7,13 +7,12 @@ class AuthError extends Error {
 }
 
 function getUserId(context) {
-  const { token } = context.request.cookies
-
-  if (!token) {
-    return null
+  const Authorization = context.request.get('Authorization')
+  if (Authorization) {
+    const token = Authorization.replace('Bearer', '')
+    const verifiedToken = verify(token, process.env.APP_SECRET)
+    return verifiedToken && verifiedToken.userId
   }
-  const verifiedToken = verify(token, process.env.APP_SECRET)
-  return verifiedToken && verifiedToken.userId
 }
 
 module.exports = {

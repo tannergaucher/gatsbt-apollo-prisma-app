@@ -39,6 +39,7 @@ class Signin extends React.Component {
         variables={this.state}
         onCompleted={({ signin }) => {
           // toggle the @client state isLogged in Bool
+          localStorage.setItem('token', signin)
           client.writeData({ data: { isLoggedIn: true } })
         }}
       >

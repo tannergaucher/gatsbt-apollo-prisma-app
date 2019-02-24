@@ -1,11 +1,10 @@
-const cookieParser = require('cookie-parser')
 const { GraphQLServer } = require('graphql-yoga')
 const { prisma } = require('./generated/prisma-client')
 const { resolvers } = require('./resolvers')
 
 require('dotenv').config()
 
-const createServer = new GraphQLServer({
+const server = new GraphQLServer({
   typeDefs: 'src/schema.graphql',
   resolvers,
   context: request => {
@@ -15,10 +14,6 @@ const createServer = new GraphQLServer({
     }
   },
 })
-
-const server = createServer
-
-server.express.use(cookieParser())
 
 server.start(
   {
