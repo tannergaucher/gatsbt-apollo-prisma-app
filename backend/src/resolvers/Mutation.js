@@ -1,7 +1,7 @@
 const { hash, compare } = require('bcrypt')
 const { sign, verify } = require('jsonwebtoken')
 
-const APP_SECRET = 'appsecret321'
+const { getUserId } = require('../utils/getUserId')
 
 const Mutation = {
   signup: async (parent, { name, email, password }, context) => {
@@ -12,7 +12,7 @@ const Mutation = {
       password: hashedPassword,
     })
 
-    const token = sign({ userId: user.id }, APP_SECRET)
+    const token = sign({ userId: user.id }, process.env.APP_SECRET)
 
     context.response.cookie('token', token, {
       httpOnly: true,
@@ -24,7 +24,6 @@ const Mutation = {
       user,
     }
   },
-
   signin: async (parent, { email, password }, context) => {
     const user = await context.prisma.user({ email })
 
@@ -37,14 +36,12 @@ const Mutation = {
       throw new Error(`Invalid Password`)
     }
 
-    const token = sign({ userId: user.id }, APP_SECRET)
+    const token = sign({ userId: user.id }, process.env.APP_SECRET)
 
     context.response.cookie('token', token, {
       httpOnly: true,
       maxAge: 1000 * 60 * 60 * 24 * 365,
     })
-
-    console.log(token)
 
     return {
       token,
@@ -55,14 +52,8 @@ const Mutation = {
     context.response.clearCookie('token')
     return { message: 'Goodbye' }
   },
-
   addEvent: async (parent, { eventId }, context) => {
-    const { token } = context.request.cookies
-    if (!token) {
-      return null
-    }
-
-    const userId = verify(token, APP_SECRET).userId
+    const userId = getUserId(context)
 
     if (!userId) {
       throw new Error(`You must be logged in for that`)
@@ -84,25 +75,19 @@ const Mutation = {
       },
     })
   },
-
   removeEvent: async (parent, { eventId }, context) => {
-    const { token } = context.request.cookies
-    if (!token) {
-      return null
-    }
-
-    const userId = verify(token, APP_SECRET).userId
+    const userId = getUserId(context)
 
     if (!userId) {
-      return null
+      throw new Error(`You must be logged in`)
     }
 
-    const [existingEvent] = await context.prisma
+    const existingEvent = await context.prisma
       .user({ id: userId })
       .events({ where: { eventId } })
 
     if (!existingEvent) {
-      return null
+      throw new Error(`No event there`)
     }
 
     if (existingEvent) {

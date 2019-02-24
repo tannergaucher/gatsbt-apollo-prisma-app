@@ -7,7 +7,6 @@ type SuccessMessage {
 type Query {
   me: User
   events: [Event!]!
-  isGoing(eventId: Int): Boolean
 }
 
 type Mutation {
@@ -24,8 +23,10 @@ type AuthPayload {
 }
 
 type Event {
-  # b.c. id namespace is rserved for type ID
+  id: ID!
+  # because id namespace is reserved for type ID, and event Id will come from CMS
   eventId: Int!
+  users: [User!]
 }
 
 type User {
@@ -33,5 +34,5 @@ type User {
   email: String!
   password: String!
   name: String
-  events: [Event!]!
+  events: [Event!]
 }

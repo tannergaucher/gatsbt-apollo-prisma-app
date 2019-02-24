@@ -24,8 +24,7 @@ server.start(
   {
     cors: {
       credentials: true,
-      origin: 'https://wizardly-panini-484141.netlify.com',
-      // origin: process.env.FRONTEND_URL_PRODUCTION,
+      origin: process.env.FRONTEND_URL,
     },
   },
   details => {

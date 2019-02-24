@@ -2,8 +2,6 @@ import React from 'react'
 import { Mutation } from 'react-apollo'
 import gql from 'graphql-tag'
 
-import { CURRENT_USER_QUERY } from '../components/User'
-
 const SIGNUP_MUTATION = gql`
   mutation SIGNUP_MUTATION(
     $email: String!
@@ -12,6 +10,15 @@ const SIGNUP_MUTATION = gql`
   ) {
     signup(email: $email, password: $password, name: $name) {
       token
+      user {
+        name
+        id
+        email
+        events {
+          id
+          eventId
+        }
+      }
     }
   }
 `
@@ -29,11 +36,7 @@ class Signup extends React.Component {
 
   render() {
     return (
-      <Mutation
-        mutation={SIGNUP_MUTATION}
-        variables={this.state}
-        refetchQueries={[{ query: CURRENT_USER_QUERY }]}
-      >
+      <Mutation mutation={SIGNUP_MUTATION} variables={this.state}>
         {(signup, { loading, error }) => (
           <>
             <form
@@ -43,6 +46,7 @@ class Signup extends React.Component {
                   console.log(error.message)
                 }
                 const res = await signup()
+                console.log('RES', res)
               }}
             >
               <fieldset disabled={loading} aria-busy={loading}>
