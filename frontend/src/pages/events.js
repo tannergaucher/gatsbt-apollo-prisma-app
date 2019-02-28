@@ -20,9 +20,6 @@ const event = ({ data, pageContext }) => {
     <Layout>
       <Query query={MY_EVENTS_QUERY}>
         {({ data, loading, error }) => {
-          //transform returned data into  1D array of events
-          const dynamicEventIDs = [1, 3]
-
           if (loading) return <p>loading...</p>
           if (error) return <p>{error.message}</p>
 

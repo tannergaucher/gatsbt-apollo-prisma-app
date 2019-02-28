@@ -41,7 +41,6 @@ exports.createPages = ({ graphql, actions }) => {
         component: path.resolve(`./src/templates/event.js`),
         context: {
           slug,
-          events: 'test',
         },
       })
     })
