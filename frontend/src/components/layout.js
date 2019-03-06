@@ -1,27 +1,34 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { StaticQuery, graphql } from 'gatsby'
+import { createGlobalStyle, ThemeProvider } from 'styled-components'
 
 import Nav from './Nav'
 
+const GlobalStyle = createGlobalStyle`
+body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+`
+
+const theme = {
+  spacing: '1em',
+  radius: '4px',
+}
+
 const Layout = ({ children }) => (
-  <StaticQuery
-    query={graphql`
-      query SiteTitleQuery {
-        site {
-          siteMetadata {
-            title
-          }
-        }
-      }
-    `}
-    render={data => (
-      <>
-        <Nav title={data.site.siteMetadata.title} />
-        <main>{children}</main>
-      </>
-    )}
-  />
+  <ThemeProvider theme={theme}>
+    <>
+      <GlobalStyle />
+      <Nav title={data.site.siteMetadata.title} />
+      <main>{children}</main>
+    </>
+  </ThemeProvider>
 )
 
 Layout.propTypes = {
