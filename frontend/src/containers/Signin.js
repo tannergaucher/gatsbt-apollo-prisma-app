@@ -1,6 +1,7 @@
 import React from 'react'
 import { Mutation } from 'react-apollo'
 import gql from 'graphql-tag'
+import { navigate } from '@reach/router'
 
 import Error from '../components/Error'
 
@@ -45,10 +46,9 @@ class Signin extends React.Component {
             <>
               <form
                 onSubmit={async e => {
-                  console.log('sign in')
                   e.preventDefault()
-                  const res = await signin()
-                  console.log('RES', res)
+                  signin()
+                  navigate(`/`)
                 }}
               >
                 <fieldset disabled={loading} aria-busy={loading}>

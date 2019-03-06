@@ -25,7 +25,7 @@ const Layout = ({ children }) => (
   <ThemeProvider theme={theme}>
     <>
       <GlobalStyle />
-      <Nav title={data.site.siteMetadata.title} />
+      <Nav />
       <main>{children}</main>
     </>
   </ThemeProvider>

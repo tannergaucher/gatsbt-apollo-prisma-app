@@ -9,10 +9,6 @@ const CURRENT_USER_QUERY = gql`
       id
       email
       name
-      categories {
-        id
-        name
-      }
     }
   }
 `
