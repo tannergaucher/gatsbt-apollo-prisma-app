@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { createGlobalStyle, ThemeProvider } from 'styled-components'
+import styled, { createGlobalStyle, ThemeProvider } from 'styled-components'
 
 import Nav from './Nav'
 
@@ -21,12 +21,18 @@ const theme = {
   radius: '4px',
 }
 
+const Main = styled.main`
+  max-width: 32em;
+  margin: 0 auto;
+  padding: 2rem;
+`
+
 const Layout = ({ children }) => (
   <ThemeProvider theme={theme}>
     <>
       <GlobalStyle />
       <Nav />
-      <main>{children}</main>
+      <Main>{children}</Main>
     </>
   </ThemeProvider>
 )

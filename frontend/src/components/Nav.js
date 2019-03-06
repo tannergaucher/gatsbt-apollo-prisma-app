@@ -24,7 +24,7 @@ const Nav = () => (
     <User>
       {({ data, loading }) => {
         return data.me ? (
-          <Signout />
+          <Signout name={data.me.name} />
         ) : (
           <a
             href="#"

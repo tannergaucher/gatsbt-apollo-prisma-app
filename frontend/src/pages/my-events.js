@@ -5,27 +5,21 @@ import Link from 'gatsby-link'
 import { graphql } from 'gatsby'
 
 import Layout from '../components/layout'
-
-// change my events to CURRENT_USER_QUERY
-const MY_EVENTS_QUERY = gql`
-  query MY_EVENTS_QUERY {
-    events {
-      eventId
-    }
-  }
-`
+import User from '../containers/User'
 
 const myEvents = ({ data }) => {
   const allEvents = data.allMarkdownRemark.edges
   return (
     <Layout>
-      <Query query={MY_EVENTS_QUERY}>
+      <User>
         {({ data, loading, error }) => {
           if (loading) return <p>loading...</p>
           if (error) return <p>{error.message}</p>
+          if (!data.me) return <p>must be signed in</p>
 
           // 1. push user eventIds to an array
-          const { events } = data
+
+          const { events } = data.me
           const eventIds = []
           events.map(event => eventIds.push(event.eventId))
 
@@ -39,19 +33,19 @@ const myEvents = ({ data }) => {
 
           // 3. map user event nodes to card components
           return isUserEventNode.map(userEvent => (
-            <Link to={userEvent.node.fields.slug} key={userEvent.node.id}>
-              <h1>{userEvent.node.frontmatter.title}</h1>
-            </Link>
+            <>
+              <Link to={userEvent.node.fields.slug} key={userEvent.node.id}>
+                <h1>{userEvent.node.frontmatter.title}</h1>
+              </Link>
+            </>
           ))
         }}
-      </Query>
+      </User>
     </Layout>
   )
 }
 
 export default myEvents
-
-export { MY_EVENTS_QUERY }
 
 export const myEventsQuery = graphql`
   query myEventsQuery {

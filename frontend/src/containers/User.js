@@ -9,6 +9,10 @@ const CURRENT_USER_QUERY = gql`
       id
       email
       name
+      events {
+        id
+        eventId
+      }
     }
   }
 `
