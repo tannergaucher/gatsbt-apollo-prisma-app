@@ -6,6 +6,7 @@ import { graphql } from 'gatsby'
 
 import Layout from '../components/layout'
 
+// change my events to CURRENT_USER_QUERY
 const MY_EVENTS_QUERY = gql`
   query MY_EVENTS_QUERY {
     events {

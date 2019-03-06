@@ -47,7 +47,7 @@ class Signin extends React.Component {
               <form
                 onSubmit={async e => {
                   e.preventDefault()
-                  signin()
+                  const res = await signin()
                   navigate(`/`)
                 }}
               >

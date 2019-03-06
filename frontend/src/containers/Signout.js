@@ -18,7 +18,11 @@ const Signout = ({ name }) => {
       mutation={SIGN_OUT_MUTATION}
       refetchQueries={[{ query: CURRENT_USER_QUERY }]}
     >
-      {signout => <button onClick={signout}>Sign out {name}</button>}
+      {signout => (
+        <a onClick={signout} href="#">
+          <h4>Sign out {name}</h4>
+        </a>
+      )}
     </Mutation>
   )
 }
