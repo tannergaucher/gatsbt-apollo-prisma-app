@@ -2,6 +2,8 @@ import React from 'react'
 import { Mutation } from 'react-apollo'
 import gql from 'graphql-tag'
 
+import Error from '../components/Error'
+
 const SIGNUP_MUTATION = gql`
   mutation SIGNUP_MUTATION(
     $email: String!
@@ -42,14 +44,12 @@ class Signup extends React.Component {
             <form
               onSubmit={async e => {
                 e.preventDefault()
-                if (error) {
-                  console.log(error.message)
-                }
                 const res = await signup()
                 console.log('RES', res)
               }}
             >
               <fieldset disabled={loading} aria-busy={loading}>
+                <Error error={error} />
                 <h1>Sign up</h1>
                 <input
                   name="email"

@@ -1,7 +1,7 @@
 const { hash, compare } = require('bcrypt')
-const { sign, verify } = require('jsonwebtoken')
+const { sign } = require('jsonwebtoken')
 
-const { getUserId } = require('../utils/getUserId')
+const { getUserId, AuthError } = require('../utils/getUserId')
 
 const Mutation = {
   signup: async (parent, { name, email, password }, context) => {
@@ -50,13 +50,14 @@ const Mutation = {
   },
   signout: (parent, { id }, context) => {
     context.response.clearCookie('token')
+
     return { message: 'Goodbye' }
   },
   addEvent: async (parent, { eventId }, context) => {
     const userId = getUserId(context)
 
     if (!userId) {
-      throw new Error(`You must be logged in for that`)
+      throw new AuthError()
     }
 
     // update related nodes type User and Type Event
@@ -79,7 +80,7 @@ const Mutation = {
     const userId = getUserId(context)
 
     if (!userId) {
-      throw new Error(`You must be logged in`)
+      throw new AuthError()
     }
 
     const existingEvent = await context.prisma

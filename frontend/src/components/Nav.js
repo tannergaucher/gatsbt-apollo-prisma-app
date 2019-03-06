@@ -1,9 +1,7 @@
 import React from 'react'
 import Link from 'gatsby-link'
-import { Query } from 'react-apollo'
 
-import { IS_LOGGED_IN } from './layout'
-import Signout from '../components/Signout'
+import Signout from '../containers/Signout'
 
 const style = {
   display: 'flex',
@@ -18,9 +16,8 @@ const Nav = ({ title }) => (
     <Link to="/my-events">
       <h4>My events</h4>
     </Link>
-    <Query query={IS_LOGGED_IN}>
-      {({ data }) => (data.isLoggedIn ? <Signout /> : null)}
-    </Query>
+    <Signout />
+    <Link to="/signin">Signin</Link>
   </div>
 )
 

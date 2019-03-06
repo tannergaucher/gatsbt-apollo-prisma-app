@@ -1,8 +1,8 @@
 import React from 'react'
 import Link from 'gatsby-link'
 
-import AddEvent from '../components/AddEvent'
-import RemoveEvent from '../components/RemoveEvent'
+import AddEvent from '../containers/AddEvent'
+import RemoveEvent from '../containers/RemoveEvent'
 
 const isGoing = false
 

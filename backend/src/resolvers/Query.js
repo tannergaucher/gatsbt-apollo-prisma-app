@@ -1,4 +1,4 @@
-const { getUserId } = require('../utils/getUserId')
+const { getUserId, AuthError } = require('../utils/getUserId')
 
 const Query = {
   me: async (parent, args, context) => {
@@ -17,12 +17,11 @@ const Query = {
     const userId = getUserId(context)
 
     if (!userId) {
-      throw new Error(`You must be logged in for that`)
+      throw new AuthError()
     }
 
     return context.prisma.user({ id: userId }).events()
   },
-  // query the users on a given event
 }
 
 module.exports = {
