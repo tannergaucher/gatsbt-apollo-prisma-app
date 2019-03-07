@@ -7,6 +7,9 @@ import Card from '../components/Card'
 import Link from '../components/styles/Link'
 import FilterLinks from '../components/FilterLinks'
 
+import AddEvent from '../containers/AddEvent'
+import { Box } from 'rebass'
+
 const notGoing = ({ data }) => {
   const allEvents = data.allMarkdownRemark.edges
   return (
@@ -42,6 +45,7 @@ const notGoing = ({ data }) => {
                     fields: { slug },
                     frontmatter: {
                       title,
+                      id: eventId,
                       featuredImage: {
                         childImageSharp: { fluid },
                       },
@@ -49,9 +53,12 @@ const notGoing = ({ data }) => {
                   } = notUserEvent.node
 
                   return (
-                    <Link to={slug} key={id} none="true">
-                      <Card title={title} fluid={fluid} />
-                    </Link>
+                    <Box css={{ position: 'relative' }} my={4}>
+                      <Link to={slug} key={id} none="true">
+                        <Card title={title} fluid={fluid} />
+                      </Link>
+                      <AddEvent eventId={eventId} />
+                    </Box>
                   )
                 })}
               </>

@@ -8,7 +8,6 @@ const MyCard = ({ title, fluid, eventId }) => (
     fontSize={[4]}
     fontWeight="bold"
     width={1}
-    my={5}
     bg="#f6f6ff"
     boxShadow="0 2px 16px rgba(0, 0, 0, 0.25)"
     css={{ position: 'relative' }}

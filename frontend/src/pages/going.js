@@ -1,5 +1,6 @@
 import React from 'react'
 import { graphql } from 'gatsby'
+import { Box } from 'rebass'
 
 import Layout from '../components/layout'
 import User from '../containers/User'
@@ -7,6 +8,7 @@ import PleaseSignin from '../containers/PleaseSignin'
 import Card from '../components/Card'
 import Link from '../components/styles/Link'
 import FilterLinks from '../components/FilterLinks'
+import RemoveEvent from '../containers/RemoveEvent'
 
 const going = ({ data }) => {
   const allEvents = data.allMarkdownRemark.edges
@@ -44,15 +46,19 @@ const going = ({ data }) => {
                     fields: { slug },
                     frontmatter: {
                       title,
+                      id: eventId,
                       featuredImage: {
                         childImageSharp: { fluid },
                       },
                     },
                   } = userEvent.node
                   return (
-                    <Link to={slug} key={id} none="true">
-                      <Card title={title} fluid={fluid} />
-                    </Link>
+                    <Box my={4}>
+                      <Link to={slug} key={id} none="true">
+                        <Card title={title} fluid={fluid} />
+                      </Link>
+                      <RemoveEvent eventId={eventId} />
+                    </Box>
                   )
                 })}
               </>

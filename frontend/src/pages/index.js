@@ -3,8 +3,7 @@ import Layout from '../components/layout'
 import Card from '../components/Card'
 import Link from '../components/styles/Link'
 import FilterLinks from '../components/FilterLinks'
-
-import { kebabCase } from 'lodash'
+import { Box } from 'rebass'
 
 const IndexPage = ({ data }) => {
   const { edges } = data.allMarkdownRemark
@@ -25,9 +24,11 @@ const IndexPage = ({ data }) => {
           },
         } = edge
         return (
-          <Link to={slug} key={id} none="true">
-            <Card title={title} fluid={fluid} />
-          </Link>
+          <Box my={4}>
+            <Link to={slug} key={id} none="true">
+              <Card title={title} fluid={fluid} />
+            </Link>
+          </Box>
         )
       })}
     </Layout>

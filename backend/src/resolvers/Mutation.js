@@ -83,30 +83,26 @@ const Mutation = {
       throw new AuthError()
     }
 
-    const existingEvent = await context.prisma
-      .user({ id: userId })
-      .events({ where: { eventId } })
+    const [existingEvent] = await context.prisma.user({ id: userId }).events({
+      where: {
+        eventId: eventId,
+      },
+    })
 
-    if (!existingEvent) {
-      throw new Error(`No event there`)
-    }
-
-    if (existingEvent) {
-      return context.prisma.updateUser({
-        where: {
-          id: userId,
+    return context.prisma.updateUser({
+      where: {
+        id: userId,
+      },
+      data: {
+        events: {
+          delete: [
+            {
+              id: existingEvent.id,
+            },
+          ],
         },
-        data: {
-          events: {
-            delete: [
-              {
-                id: existingEvent.id,
-              },
-            ],
-          },
-        },
-      })
-    }
+      },
+    })
   },
 }
 

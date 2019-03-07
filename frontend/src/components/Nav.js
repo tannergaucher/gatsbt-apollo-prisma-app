@@ -8,12 +8,12 @@ import Link from '../components/styles/Link'
 const Nav = () => (
   <Flex
     justifyContent="space-between"
-    p={1}
+    p={2}
     bg="#f6f6ff"
     css={{ boxShadow: '0px 0px 2px 1px rgba(0, 0, 0, .1)' }}
   >
     <Link to="/" none="true">
-      <h4>Gatsby Apollo Prisma App</h4>
+      <h4>Gatsby Apollo Prisma</h4>
     </Link>
 
     <User>
