@@ -80,7 +80,7 @@ class Signin extends React.Component {
                   </Box>
 
                   <Button type="submit" bg="black" mt={2} disabled={loading}>
-                    submit
+                    Sign in
                   </Button>
                 </Fieldset>
               </form>

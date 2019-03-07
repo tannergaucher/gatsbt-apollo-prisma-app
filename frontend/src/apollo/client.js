@@ -6,9 +6,6 @@ import { createHttpLink } from 'apollo-link-http'
 
 import { resolvers, typeDefs } from './resolvers'
 
-// const isBrowser = () => typeof window !== 'undefined'
-// const getCookie = () => {}
-
 const link = createHttpLink({
   uri: 'http://localhost:4000/',
   credentials: 'include',
@@ -26,7 +23,6 @@ export const client = new ApolloClient({
 
 cache.writeData({
   data: {
-    isLoggedIn: false,
-    testState: true,
+    filterLink: 'All',
   },
 })

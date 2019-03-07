@@ -20,7 +20,7 @@ const Signout = () => {
       refetchQueries={[{ query: CURRENT_USER_QUERY }]}
     >
       {signout => (
-        <Link onClick={signout} none="true" to="#">
+        <Link onClick={signout} none="true" to="/">
           <h4>Sign out</h4>
         </Link>
       )}

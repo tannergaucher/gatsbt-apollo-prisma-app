@@ -4,6 +4,8 @@ import Card from '../components/Card'
 import Link from '../components/styles/Link'
 import FilterLinks from '../components/FilterLinks'
 
+import { kebabCase } from 'lodash'
+
 const IndexPage = ({ data }) => {
   const { edges } = data.allMarkdownRemark
   return (
