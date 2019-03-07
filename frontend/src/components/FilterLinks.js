@@ -3,11 +3,17 @@ import Link from '../components/styles/Link'
 
 const FilterLinks = () => {
   return (
-    <div className="filter-links">
-      <Link to="/">All</Link>
-      <Link to="going">Going</Link>
-      <Link to="not-going">Not Going</Link>
-    </div>
+    <>
+      <Link to="/" mr={2}>
+        All
+      </Link>
+      <Link to="going" mr={2}>
+        Going
+      </Link>
+      <Link to="not-going" mr={2}>
+        Not Going
+      </Link>
+    </>
   )
 }
 

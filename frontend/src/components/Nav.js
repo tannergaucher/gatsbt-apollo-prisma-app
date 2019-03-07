@@ -1,20 +1,18 @@
 import React from 'react'
-import Link from 'gatsby-link'
-import { navigate } from '@reach/router'
-import styled from 'styled-components'
+import { Flex } from 'rebass'
 
 import Signout from '../containers/Signout'
 import User from '../containers/User'
-
-const Styled = styled.div`
-  display: flex;
-  justify-content: space-between;
-  box-shadow: 0 0 4px 4px rgba(0, 0, 0, 0.1);
-`
+import Link from '../components/styles/Link'
 
 const Nav = () => (
-  <Styled>
-    <Link to="/">
+  <Flex
+    justifyContent="space-between"
+    p={1}
+    bg="#f6f6ff"
+    css={{ boxShadow: '0px 0px 2px 1px rgba(0, 0, 0, .1)' }}
+  >
+    <Link to="/" none="true">
       <h4>Gatsby Apollo Prisma App</h4>
     </Link>
 
@@ -23,18 +21,13 @@ const Nav = () => (
         return data.me ? (
           <Signout />
         ) : (
-          <a
-            href="#"
-            onClick={() => {
-              navigate(`/signin`)
-            }}
-          >
+          <Link to="/signin" none="true">
             <h4>Sign in</h4>
-          </a>
+          </Link>
         )
       }}
     </User>
-  </Styled>
+  </Flex>
 )
 
 export default Nav

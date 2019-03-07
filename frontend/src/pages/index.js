@@ -23,7 +23,7 @@ const IndexPage = ({ data }) => {
           },
         } = edge
         return (
-          <Link to={slug} key={id}>
+          <Link to={slug} key={id} none="true">
             <Card title={title} fluid={fluid} />
           </Link>
         )

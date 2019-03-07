@@ -47,8 +47,9 @@ const notGoing = ({ data }) => {
                       },
                     },
                   } = notUserEvent.node
+
                   return (
-                    <Link to={slug} key={id}>
+                    <Link to={slug} key={id} none="true">
                       <Card title={title} fluid={fluid} />
                     </Link>
                   )

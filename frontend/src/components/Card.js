@@ -8,13 +8,14 @@ const MyCard = ({ title, fluid, eventId }) => (
     fontSize={[4]}
     fontWeight="bold"
     width={1}
-    p={3}
     my={5}
     bg="#f6f6ff"
-    borderRadius={8}
     boxShadow="0 2px 16px rgba(0, 0, 0, 0.25)"
+    borderRadius={4}
   >
-    <Heading mb={3}>{title}</Heading>
+    <Heading mb={3} pl={3} pt={3}>
+      {title}
+    </Heading>
     <Img fluid={fluid} style={{ height: '250px' }} />
   </Card>
 )

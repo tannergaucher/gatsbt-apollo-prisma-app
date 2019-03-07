@@ -3,6 +3,9 @@ import { Mutation } from 'react-apollo'
 import gql from 'graphql-tag'
 
 import Error from '../components/Error'
+import Fieldset from '../components/styles/Fieldset'
+import Input from '../components/styles/Input'
+import Button from '../components/styles/Button'
 
 const SIGNUP_MUTATION = gql`
   mutation SIGNUP_MUTATION(
@@ -48,32 +51,32 @@ class Signup extends React.Component {
                 console.log('RES', res)
               }}
             >
-              <fieldset disabled={loading} aria-busy={loading}>
+              <Fieldset disabled={loading} aria-busy={loading}>
                 <Error error={error} />
                 <h1>Sign up</h1>
-                <input
+                <Input
                   name="email"
                   type="email"
                   placeholder="email"
                   value={this.state.email}
                   onChange={this.handleChange}
                 />
-                <input
+                <Input
                   name="password"
                   type="password"
                   placeholder="password"
                   value={this.state.password}
                   onChange={this.handleChange}
                 />
-                <input
+                <Input
                   name="name"
                   type="name"
                   placeholder="name"
                   value={this.state.name}
                   onChange={this.handleChange}
                 />
-                <button type="submit">submit</button>
-              </fieldset>
+                <Button type="submit">submit</Button>
+              </Fieldset>
             </form>
           </>
         )}

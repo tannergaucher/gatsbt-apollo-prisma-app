@@ -2,8 +2,12 @@ import React from 'react'
 import { Mutation } from 'react-apollo'
 import gql from 'graphql-tag'
 import { navigate } from '@reach/router'
+import styled from 'styled-components'
 
 import Error from '../components/Error'
+import Fieldset from '../components/styles/Fieldset'
+import Input from '../components/styles/Input'
+import Button from '../components/styles/Button'
 
 import { CURRENT_USER_QUERY } from './User'
 
@@ -51,10 +55,10 @@ class Signin extends React.Component {
                   navigate(`/`)
                 }}
               >
-                <fieldset disabled={loading} aria-busy={loading}>
+                <Fieldset disabled={loading} aria-busy={loading}>
                   <h1>Sign In</h1>
                   <Error error={error} />
-                  <input
+                  <Input
                     name="email"
                     type="email"
                     placeholder="email"
@@ -62,7 +66,7 @@ class Signin extends React.Component {
                     value={this.state.email}
                     onChange={this.handleChange}
                   />
-                  <input
+                  <Input
                     name="password"
                     type="password"
                     placeholder="password"
@@ -71,8 +75,8 @@ class Signin extends React.Component {
                     onChange={this.handleChange}
                   />
 
-                  <button type="submit">submit</button>
-                </fieldset>
+                  <Button type="submit">submit</Button>
+                </Fieldset>
               </form>
             </>
           )

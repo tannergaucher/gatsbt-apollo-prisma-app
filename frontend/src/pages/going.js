@@ -50,7 +50,7 @@ const going = ({ data }) => {
                     },
                   } = userEvent.node
                   return (
-                    <Link to={slug} key={id}>
+                    <Link to={slug} key={id} none="true">
                       <Card title={title} fluid={fluid} />
                     </Link>
                   )
