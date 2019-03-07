@@ -22,7 +22,7 @@ const Nav = () => (
     </Link>
 
     <User>
-      {({ data, loading }) => {
+      {({ data }) => {
         return data.me ? (
           <Signout name={data.me.name} />
         ) : (
