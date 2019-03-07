@@ -6,7 +6,6 @@ import Layout from '../components/layout'
 import User from '../containers/User'
 import PleaseSignin from '../containers/PleaseSignin'
 
-// todo: make protected by wrapping in a please sign in component
 const myEvents = ({ data }) => {
   const allEvents = data.allMarkdownRemark.edges
   return (
@@ -23,7 +22,7 @@ const myEvents = ({ data }) => {
             const eventIds = []
             events.map(event => eventIds.push(event.eventId))
 
-            // 2. map all events from page query, if userEventsArray.indexOf event !== -1, push to isUserEventNode array
+            // 2. map all events from page query, if user has that event, push it to array
             const isUserEventNode = []
             allEvents.map(edge => {
               const { id } = edge.node.frontmatter
