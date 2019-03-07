@@ -19,6 +19,7 @@ body {
 const theme = {
   spacing: '1em',
   radius: '4px',
+  black: 'black',
 }
 
 const Main = styled.main`

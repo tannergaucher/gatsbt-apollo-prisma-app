@@ -1,6 +1,7 @@
 import React from 'react'
 import Layout from '../components/layout'
-import Event from '../components/Event'
+import Card from '../components/Card'
+import Link from '../components/styles/Link'
 
 const IndexPage = ({ data }) => {
   const { edges } = data.allMarkdownRemark
@@ -9,11 +10,21 @@ const IndexPage = ({ data }) => {
       {edges.map(edge => {
         const {
           node: {
-            frontmatter: { title, id },
+            frontmatter: {
+              title,
+              id,
+              featuredImage: {
+                childImageSharp: { fluid },
+              },
+            },
             fields: { slug },
           },
         } = edge
-        return <Event key={slug} title={title} slug={slug} eventId={id} />
+        return (
+          <Link to={slug} key={id}>
+            <Card title={title} fluid={fluid} />
+          </Link>
+        )
       })}
     </Layout>
   )
@@ -32,6 +43,13 @@ export const indexPageQuery = graphql`
           frontmatter {
             title
             id
+            featuredImage {
+              childImageSharp {
+                fluid {
+                  ...GatsbyImageSharpFluid
+                }
+              }
+            }
           }
         }
       }
