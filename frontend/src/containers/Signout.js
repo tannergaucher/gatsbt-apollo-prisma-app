@@ -12,7 +12,7 @@ const SIGN_OUT_MUTATION = gql`
   }
 `
 
-const Signout = ({ name }) => {
+const Signout = () => {
   return (
     <Mutation
       mutation={SIGN_OUT_MUTATION}
@@ -20,7 +20,7 @@ const Signout = ({ name }) => {
     >
       {signout => (
         <a onClick={signout} href="#">
-          <h4>Sign out {name}</h4>
+          <h4>Sign out</h4>
         </a>
       )}
     </Mutation>

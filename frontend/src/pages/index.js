@@ -2,11 +2,13 @@ import React from 'react'
 import Layout from '../components/layout'
 import Card from '../components/Card'
 import Link from '../components/styles/Link'
+import FilterLinks from '../components/FilterLinks'
 
 const IndexPage = ({ data }) => {
   const { edges } = data.allMarkdownRemark
   return (
     <Layout>
+      <FilterLinks />
       {edges.map(edge => {
         const {
           node: {

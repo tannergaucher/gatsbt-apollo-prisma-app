@@ -1,12 +1,14 @@
 import React from 'react'
-import Link from 'gatsby-link'
 import { graphql } from 'gatsby'
 
 import Layout from '../components/layout'
 import User from '../containers/User'
 import PleaseSignin from '../containers/PleaseSignin'
+import Card from '../components/Card'
+import Link from '../components/styles/Link'
+import FilterLinks from '../components/FilterLinks'
 
-const myEvents = ({ data }) => {
+const going = ({ data }) => {
   const allEvents = data.allMarkdownRemark.edges
   return (
     <Layout>
@@ -16,6 +18,8 @@ const myEvents = ({ data }) => {
             if (loading) return <p>loading...</p>
             if (error) return <p>{error.message}</p>
             if (!data.me) return <p>No data.me</p>
+
+            // TODO: abstract to util function
 
             // 1. push user eventIds to an array
             const { events } = data.me
@@ -31,14 +35,28 @@ const myEvents = ({ data }) => {
               }
             })
 
-            // 3. map user event nodes to card components
-            return isUserEventNode.map(userEvent => (
+            return (
               <>
-                <Link to={userEvent.node.fields.slug} key={userEvent.node.id}>
-                  <h1>{userEvent.node.frontmatter.title}</h1>
-                </Link>
+                <FilterLinks />
+                {isUserEventNode.map(userEvent => {
+                  const {
+                    id,
+                    fields: { slug },
+                    frontmatter: {
+                      title,
+                      featuredImage: {
+                        childImageSharp: { fluid },
+                      },
+                    },
+                  } = userEvent.node
+                  return (
+                    <Link to={slug} key={id}>
+                      <Card title={title} fluid={fluid} />
+                    </Link>
+                  )
+                })}
               </>
-            ))
+            )
           }}
         </User>
       </PleaseSignin>
@@ -46,10 +64,10 @@ const myEvents = ({ data }) => {
   )
 }
 
-export default myEvents
+export default going
 
-export const myEventsQuery = graphql`
-  query myEventsQuery {
+export const goingQuery = graphql`
+  query goingQuery {
     allMarkdownRemark {
       edges {
         node {
@@ -60,6 +78,13 @@ export const myEventsQuery = graphql`
           frontmatter {
             title
             id
+            featuredImage {
+              childImageSharp {
+                fluid {
+                  ...GatsbyImageSharpFluid
+                }
+              }
+            }
           }
         }
       }

@@ -17,14 +17,11 @@ const Nav = () => (
     <Link to="/">
       <h4>Gatsby Apollo Prisma App</h4>
     </Link>
-    <Link to="/my-events">
-      <h4>My events</h4>
-    </Link>
 
     <User>
       {({ data }) => {
         return data.me ? (
-          <Signout name={data.me.name} />
+          <Signout />
         ) : (
           <a
             href="#"
