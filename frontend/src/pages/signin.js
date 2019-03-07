@@ -1,13 +1,11 @@
 import React from 'react'
 import Layout from '../components/layout'
 
-import Signup from '../containers/Signup'
-import Signin from '../containers/Signin'
+import PleaseSignin from '../containers/PleaseSignin'
 
 const signin = () => (
   <Layout>
-    <Signin />
-    <Signup />
+    <PleaseSignin />
   </Layout>
 )
 

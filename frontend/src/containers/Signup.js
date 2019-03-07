@@ -1,11 +1,12 @@
 import React from 'react'
 import { Mutation } from 'react-apollo'
 import gql from 'graphql-tag'
+import { navigate } from '@reach/router'
 
 import Error from '../components/Error'
 import Fieldset from '../components/styles/Fieldset'
 import Input from '../components/styles/Input'
-import Button from '../components/styles/Button'
+import { Button, Box } from 'rebass'
 
 const SIGNUP_MUTATION = gql`
   mutation SIGNUP_MUTATION(
@@ -48,7 +49,8 @@ class Signup extends React.Component {
               onSubmit={async e => {
                 e.preventDefault()
                 const res = await signup()
-                console.log('RES', res)
+                // change to last page from history
+                navigate('/')
               }}
             >
               <Fieldset disabled={loading} aria-busy={loading}>
@@ -61,21 +63,27 @@ class Signup extends React.Component {
                   value={this.state.email}
                   onChange={this.handleChange}
                 />
-                <Input
-                  name="password"
-                  type="password"
-                  placeholder="password"
-                  value={this.state.password}
-                  onChange={this.handleChange}
-                />
-                <Input
-                  name="name"
-                  type="name"
-                  placeholder="name"
-                  value={this.state.name}
-                  onChange={this.handleChange}
-                />
-                <Button type="submit">submit</Button>
+                <Box mt={2}>
+                  <Input
+                    name="password"
+                    type="password"
+                    placeholder="password"
+                    value={this.state.password}
+                    onChange={this.handleChange}
+                  />
+                </Box>
+                <Box mt={2}>
+                  <Input
+                    name="name"
+                    type="text"
+                    placeholder="name"
+                    value={this.state.name}
+                    onChange={this.handleChange}
+                  />
+                </Box>
+                <Button type="submit" bg="black" mt={2} disabled={loading}>
+                  Sign up
+                </Button>
               </Fieldset>
             </form>
           </>
