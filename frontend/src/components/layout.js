@@ -23,7 +23,7 @@ const theme = {
 }
 
 const Main = styled.main`
-  max-width: 38em;
+  max-width: 42em;
   margin: 0 auto;
   padding: 2rem;
 `

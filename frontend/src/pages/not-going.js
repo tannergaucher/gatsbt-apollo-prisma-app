@@ -8,7 +8,8 @@ import Link from '../components/styles/Link'
 import FilterLinks from '../components/FilterLinks'
 
 import AddEvent from '../containers/AddEvent'
-import { Box } from 'rebass'
+
+import WithFAB from '../components/styles/WithFAB'
 
 const notGoing = ({ data }) => {
   const allEvents = data.allMarkdownRemark.edges
@@ -53,12 +54,14 @@ const notGoing = ({ data }) => {
                   } = notUserEvent.node
 
                   return (
-                    <Box css={{ position: 'relative' }} my={4}>
+                    <WithFAB key={id}>
                       <Link to={slug} key={id} none="true">
                         <Card title={title} fluid={fluid} />
                       </Link>
-                      <AddEvent eventId={eventId} />
-                    </Box>
+                      <div className="absolute">
+                        <AddEvent eventId={eventId} />
+                      </div>
+                    </WithFAB>
                   )
                 })}
               </>

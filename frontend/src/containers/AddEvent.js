@@ -1,7 +1,8 @@
 import React from 'react'
 import { Mutation } from 'react-apollo'
 import gql from 'graphql-tag'
-import { Button } from 'rebass'
+import FAB from '../components/styles/FAB'
+import { CURRENT_USER_QUERY } from './User'
 
 const ADD_EVENT_MUTATION = gql`
   mutation ADD_EVENT_MUTATION($eventId: Int!) {
@@ -20,9 +21,14 @@ const AddEvent = ({ eventId }) => {
     <Mutation
       mutation={ADD_EVENT_MUTATION}
       variables={{ eventId }}
+      refetchQueries={[{ query: CURRENT_USER_QUERY }]}
       update={update}
     >
-      {addEvent => <Button onClick={addEvent}>+</Button>}
+      {addEvent => (
+        <FAB onClick={addEvent}>
+          <strong>&#43;</strong>
+        </FAB>
+      )}
     </Mutation>
   )
 }

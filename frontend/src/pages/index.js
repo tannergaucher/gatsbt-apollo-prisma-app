@@ -1,9 +1,13 @@
 import React from 'react'
+import styled from 'styled-components'
 import Layout from '../components/layout'
 import Card from '../components/Card'
 import Link from '../components/styles/Link'
 import FilterLinks from '../components/FilterLinks'
-import { Box } from 'rebass'
+
+const Styled = styled.div`
+  margin-bottom: ${props => props.theme.spacing};
+`
 
 const IndexPage = ({ data }) => {
   const { edges } = data.allMarkdownRemark
@@ -23,12 +27,13 @@ const IndexPage = ({ data }) => {
             fields: { slug },
           },
         } = edge
+
         return (
-          <Box my={4}>
-            <Link to={slug} key={id} none="true">
+          <Styled key={id}>
+            <Link to={slug} none="true">
               <Card title={title} fluid={fluid} />
             </Link>
-          </Box>
+          </Styled>
         )
       })}
     </Layout>

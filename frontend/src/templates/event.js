@@ -1,15 +1,32 @@
 import React from 'react'
 import { graphql } from 'gatsby'
+import Img from 'gatsby-image'
 
 import Layout from '../components/layout'
+import { Heading, Box } from 'rebass'
 
 const event = ({ data }) => {
+  const {
+    frontmatter: {
+      title,
+      featuredImage: {
+        childImageSharp: { fluid },
+      },
+    },
+    html,
+  } = data.markdownRemark
   return (
     <Layout>
-      <h1>{data.markdownRemark.frontmatter.title}</h1>
-      <div
-        className="event-article"
-        dangerouslySetInnerHTML={{ __html: data.markdownRemark.html }}
+      <Heading fontSize={[4, 5, 6]} mt={4} mb={4}>
+        {title}
+      </Heading>
+      <Img fluid={fluid} />
+
+      <Box
+        fontSize={[3, 4]}
+        dangerouslySetInnerHTML={{ __html: html }}
+        mt={5}
+        mb={4}
       />
     </Layout>
   )
@@ -23,6 +40,13 @@ export const eventPageQuery = graphql`
       html
       frontmatter {
         title
+        featuredImage {
+          childImageSharp {
+            fluid {
+              ...GatsbyImageSharpFluid
+            }
+          }
+        }
       }
     }
   }

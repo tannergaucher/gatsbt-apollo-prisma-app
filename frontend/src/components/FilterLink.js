@@ -1,7 +1,6 @@
 import React from 'react'
 import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
-
 import { kebabCase } from 'lodash'
 
 import Link from '../components/styles/Link'
@@ -12,10 +11,6 @@ const ACTIVE_FILTER_QUERY = gql`
   }
 `
 
-function isActive(filter, filterFromCache) {
-  return filter === filterFromCache
-}
-
 function getUrl(filter) {
   if (filter === 'All') {
     return '/'
@@ -25,9 +20,7 @@ function getUrl(filter) {
 
 const FilterLink = ({ filter }) => (
   <Query query={ACTIVE_FILTER_QUERY}>
-    {({ data, loading, client }) => {
-      if (loading) return null
-
+    {({ data, client }) => {
       return (
         <Link
           to={`/${kebabCase(getUrl(filter))}`}
@@ -35,10 +28,9 @@ const FilterLink = ({ filter }) => (
           onClick={() => {
             client.writeData({ data: { filterLink: filter } })
           }}
-          active={isActive(filter, data.filterLink)}
-          style={{ fontWeight: 'bold' }}
+          active={filter === data.filterLink}
         >
-          {filter}
+          <strong>{filter}</strong>
         </Link>
       )
     }}

@@ -1,24 +1,23 @@
 import React from 'react'
+import styled from 'styled-components'
 
-import { Card, Heading } from 'rebass'
 import Img from 'gatsby-image'
 
-const MyCard = ({ title, fluid, eventId }) => (
-  <Card
-    fontSize={[4]}
-    fontWeight="bold"
-    width={1}
-    bg="#f6f6ff"
-    boxShadow="0 2px 16px rgba(0, 0, 0, 0.25)"
-    css={{ position: 'relative' }}
-  >
-    <Heading
-      pl={3}
-      pb={3}
-      css={{ position: 'absolute', bottom: 0, zIndex: '3', color: 'white' }}
-    >
-      {title}
-    </Heading>
+const Styled = styled.div`
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.25);
+  position: relative;
+
+  h2 {
+    position: absolute;
+    z-index: 2;
+    padding-left: ${props => props.theme.spacing};
+    color: white;
+  }
+`
+
+const Card = ({ title, fluid }) => (
+  <Styled>
+    <h2>{title}</h2>
     <Img
       fluid={fluid}
       style={{
@@ -27,7 +26,7 @@ const MyCard = ({ title, fluid, eventId }) => (
         borderRadius: '4px',
       }}
     />
-  </Card>
+  </Styled>
 )
 
-export default MyCard
+export default Card

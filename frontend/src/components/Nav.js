@@ -1,17 +1,23 @@
 import React from 'react'
-import { Flex } from 'rebass'
+import styled from 'styled-components'
 
 import Signout from '../containers/Signout'
 import User from '../containers/User'
 import Link from '../components/styles/Link'
 
+const Styled = styled.div`
+  display: flex;
+  justify-content: space-between;
+  background: #f6f6ff;
+  box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  padding: 0 ${props => props.theme.spacing};
+`
+
 const Nav = () => (
-  <Flex
-    justifyContent="space-between"
-    p={2}
-    bg="#f6f6ff"
-    css={{ boxShadow: '0px 0px 2px 1px rgba(0, 0, 0, .1)' }}
-  >
+  <Styled>
     <Link to="/" none="true">
       <h4>Gatsby Apollo Prisma</h4>
     </Link>
@@ -27,7 +33,7 @@ const Nav = () => (
         )
       }}
     </User>
-  </Flex>
+  </Styled>
 )
 
 export default Nav

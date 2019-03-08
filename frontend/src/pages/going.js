@@ -1,6 +1,5 @@
 import React from 'react'
 import { graphql } from 'gatsby'
-import { Box } from 'rebass'
 
 import Layout from '../components/layout'
 import User from '../containers/User'
@@ -9,6 +8,7 @@ import Card from '../components/Card'
 import Link from '../components/styles/Link'
 import FilterLinks from '../components/FilterLinks'
 import RemoveEvent from '../containers/RemoveEvent'
+import WithFAB from '../components/styles/WithFAB'
 
 const going = ({ data }) => {
   const allEvents = data.allMarkdownRemark.edges
@@ -52,13 +52,16 @@ const going = ({ data }) => {
                       },
                     },
                   } = userEvent.node
+
                   return (
-                    <Box my={4}>
-                      <Link to={slug} key={id} none="true">
+                    <WithFAB key={id}>
+                      <Link to={slug} none="true">
                         <Card title={title} fluid={fluid} />
                       </Link>
-                      <RemoveEvent eventId={eventId} />
-                    </Box>
+                      <div className="absolute">
+                        <RemoveEvent eventId={eventId} />
+                      </div>
+                    </WithFAB>
                   )
                 })}
               </>
