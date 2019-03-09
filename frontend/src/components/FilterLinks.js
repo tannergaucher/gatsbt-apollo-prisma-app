@@ -4,7 +4,8 @@ import styled from 'styled-components'
 
 const Styled = styled.div`
   display: flex;
-  margin-bottom: 3em;
+  justify-content: center;
+  margin-bottom: 2em;
 `
 
 const FilterLinks = () => {

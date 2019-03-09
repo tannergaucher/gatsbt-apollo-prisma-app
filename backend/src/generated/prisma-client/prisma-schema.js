@@ -16,9 +16,8 @@ type BatchPayload {
 }
 
 type Event {
-  id: ID!
-  eventId: Int!
-  users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
+  nodeId: String!
+  user: User!
 }
 
 type EventConnection {
@@ -28,17 +27,17 @@ type EventConnection {
 }
 
 input EventCreateInput {
-  eventId: Int!
-  users: UserCreateManyWithoutEventsInput
+  nodeId: String!
+  user: UserCreateOneWithoutEventsInput!
 }
 
-input EventCreateManyWithoutUsersInput {
-  create: [EventCreateWithoutUsersInput!]
+input EventCreateManyWithoutUserInput {
+  create: [EventCreateWithoutUserInput!]
   connect: [EventWhereUniqueInput!]
 }
 
-input EventCreateWithoutUsersInput {
-  eventId: Int!
+input EventCreateWithoutUserInput {
+  nodeId: String!
 }
 
 type EventEdge {
@@ -47,10 +46,10 @@ type EventEdge {
 }
 
 enum EventOrderByInput {
+  nodeId_ASC
+  nodeId_DESC
   id_ASC
   id_DESC
-  eventId_ASC
-  eventId_DESC
   createdAt_ASC
   createdAt_DESC
   updatedAt_ASC
@@ -58,33 +57,24 @@ enum EventOrderByInput {
 }
 
 type EventPreviousValues {
-  id: ID!
-  eventId: Int!
+  nodeId: String!
 }
 
 input EventScalarWhereInput {
-  id: ID
-  id_not: ID
-  id_in: [ID!]
-  id_not_in: [ID!]
-  id_lt: ID
-  id_lte: ID
-  id_gt: ID
-  id_gte: ID
-  id_contains: ID
-  id_not_contains: ID
-  id_starts_with: ID
-  id_not_starts_with: ID
-  id_ends_with: ID
-  id_not_ends_with: ID
-  eventId: Int
-  eventId_not: Int
-  eventId_in: [Int!]
-  eventId_not_in: [Int!]
-  eventId_lt: Int
-  eventId_lte: Int
-  eventId_gt: Int
-  eventId_gte: Int
+  nodeId: String
+  nodeId_not: String
+  nodeId_in: [String!]
+  nodeId_not_in: [String!]
+  nodeId_lt: String
+  nodeId_lte: String
+  nodeId_gt: String
+  nodeId_gte: String
+  nodeId_contains: String
+  nodeId_not_contains: String
+  nodeId_starts_with: String
+  nodeId_not_starts_with: String
+  nodeId_ends_with: String
+  nodeId_not_ends_with: String
   AND: [EventScalarWhereInput!]
   OR: [EventScalarWhereInput!]
   NOT: [EventScalarWhereInput!]
@@ -109,26 +99,26 @@ input EventSubscriptionWhereInput {
 }
 
 input EventUpdateInput {
-  eventId: Int
-  users: UserUpdateManyWithoutEventsInput
+  nodeId: String
+  user: UserUpdateOneRequiredWithoutEventsInput
 }
 
 input EventUpdateManyDataInput {
-  eventId: Int
+  nodeId: String
 }
 
 input EventUpdateManyMutationInput {
-  eventId: Int
+  nodeId: String
 }
 
-input EventUpdateManyWithoutUsersInput {
-  create: [EventCreateWithoutUsersInput!]
+input EventUpdateManyWithoutUserInput {
+  create: [EventCreateWithoutUserInput!]
   delete: [EventWhereUniqueInput!]
   connect: [EventWhereUniqueInput!]
   set: [EventWhereUniqueInput!]
   disconnect: [EventWhereUniqueInput!]
-  update: [EventUpdateWithWhereUniqueWithoutUsersInput!]
-  upsert: [EventUpsertWithWhereUniqueWithoutUsersInput!]
+  update: [EventUpdateWithWhereUniqueWithoutUserInput!]
+  upsert: [EventUpsertWithWhereUniqueWithoutUserInput!]
   deleteMany: [EventScalarWhereInput!]
   updateMany: [EventUpdateManyWithWhereNestedInput!]
 }
@@ -138,54 +128,44 @@ input EventUpdateManyWithWhereNestedInput {
   data: EventUpdateManyDataInput!
 }
 
-input EventUpdateWithoutUsersDataInput {
-  eventId: Int
+input EventUpdateWithoutUserDataInput {
+  nodeId: String
 }
 
-input EventUpdateWithWhereUniqueWithoutUsersInput {
+input EventUpdateWithWhereUniqueWithoutUserInput {
   where: EventWhereUniqueInput!
-  data: EventUpdateWithoutUsersDataInput!
+  data: EventUpdateWithoutUserDataInput!
 }
 
-input EventUpsertWithWhereUniqueWithoutUsersInput {
+input EventUpsertWithWhereUniqueWithoutUserInput {
   where: EventWhereUniqueInput!
-  update: EventUpdateWithoutUsersDataInput!
-  create: EventCreateWithoutUsersInput!
+  update: EventUpdateWithoutUserDataInput!
+  create: EventCreateWithoutUserInput!
 }
 
 input EventWhereInput {
-  id: ID
-  id_not: ID
-  id_in: [ID!]
-  id_not_in: [ID!]
-  id_lt: ID
-  id_lte: ID
-  id_gt: ID
-  id_gte: ID
-  id_contains: ID
-  id_not_contains: ID
-  id_starts_with: ID
-  id_not_starts_with: ID
-  id_ends_with: ID
-  id_not_ends_with: ID
-  eventId: Int
-  eventId_not: Int
-  eventId_in: [Int!]
-  eventId_not_in: [Int!]
-  eventId_lt: Int
-  eventId_lte: Int
-  eventId_gt: Int
-  eventId_gte: Int
-  users_every: UserWhereInput
-  users_some: UserWhereInput
-  users_none: UserWhereInput
+  nodeId: String
+  nodeId_not: String
+  nodeId_in: [String!]
+  nodeId_not_in: [String!]
+  nodeId_lt: String
+  nodeId_lte: String
+  nodeId_gt: String
+  nodeId_gte: String
+  nodeId_contains: String
+  nodeId_not_contains: String
+  nodeId_starts_with: String
+  nodeId_not_starts_with: String
+  nodeId_ends_with: String
+  nodeId_not_ends_with: String
+  user: UserWhereInput
   AND: [EventWhereInput!]
   OR: [EventWhereInput!]
   NOT: [EventWhereInput!]
 }
 
 input EventWhereUniqueInput {
-  id: ID
+  nodeId: String
 }
 
 scalar Long
@@ -255,12 +235,12 @@ input UserCreateInput {
   email: String!
   password: String!
   name: String
-  events: EventCreateManyWithoutUsersInput
+  events: EventCreateManyWithoutUserInput
 }
 
-input UserCreateManyWithoutEventsInput {
-  create: [UserCreateWithoutEventsInput!]
-  connect: [UserWhereUniqueInput!]
+input UserCreateOneWithoutEventsInput {
+  create: UserCreateWithoutEventsInput
+  connect: UserWhereUniqueInput
 }
 
 input UserCreateWithoutEventsInput {
@@ -296,68 +276,6 @@ type UserPreviousValues {
   name: String
 }
 
-input UserScalarWhereInput {
-  id: ID
-  id_not: ID
-  id_in: [ID!]
-  id_not_in: [ID!]
-  id_lt: ID
-  id_lte: ID
-  id_gt: ID
-  id_gte: ID
-  id_contains: ID
-  id_not_contains: ID
-  id_starts_with: ID
-  id_not_starts_with: ID
-  id_ends_with: ID
-  id_not_ends_with: ID
-  email: String
-  email_not: String
-  email_in: [String!]
-  email_not_in: [String!]
-  email_lt: String
-  email_lte: String
-  email_gt: String
-  email_gte: String
-  email_contains: String
-  email_not_contains: String
-  email_starts_with: String
-  email_not_starts_with: String
-  email_ends_with: String
-  email_not_ends_with: String
-  password: String
-  password_not: String
-  password_in: [String!]
-  password_not_in: [String!]
-  password_lt: String
-  password_lte: String
-  password_gt: String
-  password_gte: String
-  password_contains: String
-  password_not_contains: String
-  password_starts_with: String
-  password_not_starts_with: String
-  password_ends_with: String
-  password_not_ends_with: String
-  name: String
-  name_not: String
-  name_in: [String!]
-  name_not_in: [String!]
-  name_lt: String
-  name_lte: String
-  name_gt: String
-  name_gte: String
-  name_contains: String
-  name_not_contains: String
-  name_starts_with: String
-  name_not_starts_with: String
-  name_ends_with: String
-  name_not_ends_with: String
-  AND: [UserScalarWhereInput!]
-  OR: [UserScalarWhereInput!]
-  NOT: [UserScalarWhereInput!]
-}
-
 type UserSubscriptionPayload {
   mutation: MutationType!
   node: User
@@ -380,13 +298,7 @@ input UserUpdateInput {
   email: String
   password: String
   name: String
-  events: EventUpdateManyWithoutUsersInput
-}
-
-input UserUpdateManyDataInput {
-  email: String
-  password: String
-  name: String
+  events: EventUpdateManyWithoutUserInput
 }
 
 input UserUpdateManyMutationInput {
@@ -395,21 +307,11 @@ input UserUpdateManyMutationInput {
   name: String
 }
 
-input UserUpdateManyWithoutEventsInput {
-  create: [UserCreateWithoutEventsInput!]
-  delete: [UserWhereUniqueInput!]
-  connect: [UserWhereUniqueInput!]
-  set: [UserWhereUniqueInput!]
-  disconnect: [UserWhereUniqueInput!]
-  update: [UserUpdateWithWhereUniqueWithoutEventsInput!]
-  upsert: [UserUpsertWithWhereUniqueWithoutEventsInput!]
-  deleteMany: [UserScalarWhereInput!]
-  updateMany: [UserUpdateManyWithWhereNestedInput!]
-}
-
-input UserUpdateManyWithWhereNestedInput {
-  where: UserScalarWhereInput!
-  data: UserUpdateManyDataInput!
+input UserUpdateOneRequiredWithoutEventsInput {
+  create: UserCreateWithoutEventsInput
+  update: UserUpdateWithoutEventsDataInput
+  upsert: UserUpsertWithoutEventsInput
+  connect: UserWhereUniqueInput
 }
 
 input UserUpdateWithoutEventsDataInput {
@@ -418,13 +320,7 @@ input UserUpdateWithoutEventsDataInput {
   name: String
 }
 
-input UserUpdateWithWhereUniqueWithoutEventsInput {
-  where: UserWhereUniqueInput!
-  data: UserUpdateWithoutEventsDataInput!
-}
-
-input UserUpsertWithWhereUniqueWithoutEventsInput {
-  where: UserWhereUniqueInput!
+input UserUpsertWithoutEventsInput {
   update: UserUpdateWithoutEventsDataInput!
   create: UserCreateWithoutEventsInput!
 }

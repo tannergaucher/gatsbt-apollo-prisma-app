@@ -21,8 +21,7 @@ const SIGNUP_MUTATION = gql`
         id
         email
         events {
-          id
-          eventId
+          nodeId
         }
       }
     }
@@ -56,6 +55,15 @@ class Signup extends React.Component {
               <Fieldset disabled={loading} aria-busy={loading}>
                 <Error error={error} />
                 <h1>Sign up</h1>
+
+                <Input
+                  name="name"
+                  type="text"
+                  placeholder="name"
+                  value={this.state.name}
+                  onChange={this.handleChange}
+                />
+
                 <Input
                   name="email"
                   type="email"
@@ -63,24 +71,14 @@ class Signup extends React.Component {
                   value={this.state.email}
                   onChange={this.handleChange}
                 />
-                <Box mt={2}>
-                  <Input
-                    name="password"
-                    type="password"
-                    placeholder="password"
-                    value={this.state.password}
-                    onChange={this.handleChange}
-                  />
-                </Box>
-                <Box mt={2}>
-                  <Input
-                    name="name"
-                    type="text"
-                    placeholder="name"
-                    value={this.state.name}
-                    onChange={this.handleChange}
-                  />
-                </Box>
+                <Input
+                  name="password"
+                  type="password"
+                  placeholder="password"
+                  value={this.state.password}
+                  onChange={this.handleChange}
+                />
+
                 <Button type="submit" bg="black" mt={2} disabled={loading}>
                   Sign up
                 </Button>

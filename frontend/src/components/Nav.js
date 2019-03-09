@@ -13,7 +13,7 @@ const Styled = styled.div`
   position: sticky;
   top: 0;
   z-index: 3;
-  padding: 0 ${props => props.theme.spacing};
+  padding: 0 2em;
 `
 
 const Nav = () => (

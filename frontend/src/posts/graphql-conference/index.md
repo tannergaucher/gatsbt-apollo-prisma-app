@@ -1,6 +1,5 @@
 ---
 title: 'GraphQL Conference'
-id: 5
 featuredImage: './featured.jpg'
 ---
 

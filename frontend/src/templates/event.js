@@ -17,7 +17,7 @@ const event = ({ data }) => {
   } = data.markdownRemark
   return (
     <Layout>
-      <Heading fontSize={[4, 5, 6]} mt={4} mb={4}>
+      <Heading fontSize={[5, 6, 7]} mt={4} mb={4}>
         {title}
       </Heading>
       <Img fluid={fluid} />

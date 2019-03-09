@@ -4,17 +4,27 @@ const FAB = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 35px;
-  width: 35px;
+  height: 55px;
+  width: 55px;
   border-radius: 50%;
-  background: black;
-  color: white;
+  background: white;
+  color: black;
   border: none;
-  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.05);
+  font-size: 16px;
   transition: 0.2s ease-in-out;
+
   &:hover {
     transition: 0.2s ease-in-out;
-    transform: scale(1.2);
+    transform: rotate(90deg) scale(1.2);
+  }
+
+  &:focus {
+    border-radius: 50%;
+    background: palevioletred;
+    color: white;
+    transition: 0.4s ease-in-out;
   }
 `
 

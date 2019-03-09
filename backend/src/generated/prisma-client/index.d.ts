@@ -146,6 +146,16 @@ export interface ClientConstructor<T> {
  * Types
  */
 
+export type EventOrderByInput =
+  | "nodeId_ASC"
+  | "nodeId_DESC"
+  | "id_ASC"
+  | "id_DESC"
+  | "createdAt_ASC"
+  | "createdAt_DESC"
+  | "updatedAt_ASC"
+  | "updatedAt_DESC";
+
 export type UserOrderByInput =
   | "id_ASC"
   | "id_DESC"
@@ -160,21 +170,32 @@ export type UserOrderByInput =
   | "updatedAt_ASC"
   | "updatedAt_DESC";
 
-export type EventOrderByInput =
-  | "id_ASC"
-  | "id_DESC"
-  | "eventId_ASC"
-  | "eventId_DESC"
-  | "createdAt_ASC"
-  | "createdAt_DESC"
-  | "updatedAt_ASC"
-  | "updatedAt_DESC";
-
 export type MutationType = "CREATED" | "UPDATED" | "DELETED";
 
 export type EventWhereUniqueInput = AtLeastOne<{
-  id: ID_Input;
+  nodeId: String;
 }>;
+
+export interface EventWhereInput {
+  nodeId?: String;
+  nodeId_not?: String;
+  nodeId_in?: String[] | String;
+  nodeId_not_in?: String[] | String;
+  nodeId_lt?: String;
+  nodeId_lte?: String;
+  nodeId_gt?: String;
+  nodeId_gte?: String;
+  nodeId_contains?: String;
+  nodeId_not_contains?: String;
+  nodeId_starts_with?: String;
+  nodeId_not_starts_with?: String;
+  nodeId_ends_with?: String;
+  nodeId_not_ends_with?: String;
+  user?: UserWhereInput;
+  AND?: EventWhereInput[] | EventWhereInput;
+  OR?: EventWhereInput[] | EventWhereInput;
+  NOT?: EventWhereInput[] | EventWhereInput;
+}
 
 export interface UserWhereInput {
   id?: ID_Input;
@@ -241,50 +262,19 @@ export interface UserWhereInput {
   NOT?: UserWhereInput[] | UserWhereInput;
 }
 
-export interface EventWhereInput {
-  id?: ID_Input;
-  id_not?: ID_Input;
-  id_in?: ID_Input[] | ID_Input;
-  id_not_in?: ID_Input[] | ID_Input;
-  id_lt?: ID_Input;
-  id_lte?: ID_Input;
-  id_gt?: ID_Input;
-  id_gte?: ID_Input;
-  id_contains?: ID_Input;
-  id_not_contains?: ID_Input;
-  id_starts_with?: ID_Input;
-  id_not_starts_with?: ID_Input;
-  id_ends_with?: ID_Input;
-  id_not_ends_with?: ID_Input;
-  eventId?: Int;
-  eventId_not?: Int;
-  eventId_in?: Int[] | Int;
-  eventId_not_in?: Int[] | Int;
-  eventId_lt?: Int;
-  eventId_lte?: Int;
-  eventId_gt?: Int;
-  eventId_gte?: Int;
-  users_every?: UserWhereInput;
-  users_some?: UserWhereInput;
-  users_none?: UserWhereInput;
-  AND?: EventWhereInput[] | EventWhereInput;
-  OR?: EventWhereInput[] | EventWhereInput;
-  NOT?: EventWhereInput[] | EventWhereInput;
-}
-
 export type UserWhereUniqueInput = AtLeastOne<{
   id: ID_Input;
   email?: String;
 }>;
 
 export interface EventCreateInput {
-  eventId: Int;
-  users?: UserCreateManyWithoutEventsInput;
+  nodeId: String;
+  user: UserCreateOneWithoutEventsInput;
 }
 
-export interface UserCreateManyWithoutEventsInput {
-  create?: UserCreateWithoutEventsInput[] | UserCreateWithoutEventsInput;
-  connect?: UserWhereUniqueInput[] | UserWhereUniqueInput;
+export interface UserCreateOneWithoutEventsInput {
+  create?: UserCreateWithoutEventsInput;
+  connect?: UserWhereUniqueInput;
 }
 
 export interface UserCreateWithoutEventsInput {
@@ -294,31 +284,15 @@ export interface UserCreateWithoutEventsInput {
 }
 
 export interface EventUpdateInput {
-  eventId?: Int;
-  users?: UserUpdateManyWithoutEventsInput;
+  nodeId?: String;
+  user?: UserUpdateOneRequiredWithoutEventsInput;
 }
 
-export interface UserUpdateManyWithoutEventsInput {
-  create?: UserCreateWithoutEventsInput[] | UserCreateWithoutEventsInput;
-  delete?: UserWhereUniqueInput[] | UserWhereUniqueInput;
-  connect?: UserWhereUniqueInput[] | UserWhereUniqueInput;
-  set?: UserWhereUniqueInput[] | UserWhereUniqueInput;
-  disconnect?: UserWhereUniqueInput[] | UserWhereUniqueInput;
-  update?:
-    | UserUpdateWithWhereUniqueWithoutEventsInput[]
-    | UserUpdateWithWhereUniqueWithoutEventsInput;
-  upsert?:
-    | UserUpsertWithWhereUniqueWithoutEventsInput[]
-    | UserUpsertWithWhereUniqueWithoutEventsInput;
-  deleteMany?: UserScalarWhereInput[] | UserScalarWhereInput;
-  updateMany?:
-    | UserUpdateManyWithWhereNestedInput[]
-    | UserUpdateManyWithWhereNestedInput;
-}
-
-export interface UserUpdateWithWhereUniqueWithoutEventsInput {
-  where: UserWhereUniqueInput;
-  data: UserUpdateWithoutEventsDataInput;
+export interface UserUpdateOneRequiredWithoutEventsInput {
+  create?: UserCreateWithoutEventsInput;
+  update?: UserUpdateWithoutEventsDataInput;
+  upsert?: UserUpsertWithoutEventsInput;
+  connect?: UserWhereUniqueInput;
 }
 
 export interface UserUpdateWithoutEventsDataInput {
@@ -327,168 +301,86 @@ export interface UserUpdateWithoutEventsDataInput {
   name?: String;
 }
 
-export interface UserUpsertWithWhereUniqueWithoutEventsInput {
-  where: UserWhereUniqueInput;
+export interface UserUpsertWithoutEventsInput {
   update: UserUpdateWithoutEventsDataInput;
   create: UserCreateWithoutEventsInput;
 }
 
-export interface UserScalarWhereInput {
-  id?: ID_Input;
-  id_not?: ID_Input;
-  id_in?: ID_Input[] | ID_Input;
-  id_not_in?: ID_Input[] | ID_Input;
-  id_lt?: ID_Input;
-  id_lte?: ID_Input;
-  id_gt?: ID_Input;
-  id_gte?: ID_Input;
-  id_contains?: ID_Input;
-  id_not_contains?: ID_Input;
-  id_starts_with?: ID_Input;
-  id_not_starts_with?: ID_Input;
-  id_ends_with?: ID_Input;
-  id_not_ends_with?: ID_Input;
-  email?: String;
-  email_not?: String;
-  email_in?: String[] | String;
-  email_not_in?: String[] | String;
-  email_lt?: String;
-  email_lte?: String;
-  email_gt?: String;
-  email_gte?: String;
-  email_contains?: String;
-  email_not_contains?: String;
-  email_starts_with?: String;
-  email_not_starts_with?: String;
-  email_ends_with?: String;
-  email_not_ends_with?: String;
-  password?: String;
-  password_not?: String;
-  password_in?: String[] | String;
-  password_not_in?: String[] | String;
-  password_lt?: String;
-  password_lte?: String;
-  password_gt?: String;
-  password_gte?: String;
-  password_contains?: String;
-  password_not_contains?: String;
-  password_starts_with?: String;
-  password_not_starts_with?: String;
-  password_ends_with?: String;
-  password_not_ends_with?: String;
-  name?: String;
-  name_not?: String;
-  name_in?: String[] | String;
-  name_not_in?: String[] | String;
-  name_lt?: String;
-  name_lte?: String;
-  name_gt?: String;
-  name_gte?: String;
-  name_contains?: String;
-  name_not_contains?: String;
-  name_starts_with?: String;
-  name_not_starts_with?: String;
-  name_ends_with?: String;
-  name_not_ends_with?: String;
-  AND?: UserScalarWhereInput[] | UserScalarWhereInput;
-  OR?: UserScalarWhereInput[] | UserScalarWhereInput;
-  NOT?: UserScalarWhereInput[] | UserScalarWhereInput;
-}
-
-export interface UserUpdateManyWithWhereNestedInput {
-  where: UserScalarWhereInput;
-  data: UserUpdateManyDataInput;
-}
-
-export interface UserUpdateManyDataInput {
-  email?: String;
-  password?: String;
-  name?: String;
-}
-
 export interface EventUpdateManyMutationInput {
-  eventId?: Int;
+  nodeId?: String;
 }
 
 export interface UserCreateInput {
   email: String;
   password: String;
   name?: String;
-  events?: EventCreateManyWithoutUsersInput;
+  events?: EventCreateManyWithoutUserInput;
 }
 
-export interface EventCreateManyWithoutUsersInput {
-  create?: EventCreateWithoutUsersInput[] | EventCreateWithoutUsersInput;
+export interface EventCreateManyWithoutUserInput {
+  create?: EventCreateWithoutUserInput[] | EventCreateWithoutUserInput;
   connect?: EventWhereUniqueInput[] | EventWhereUniqueInput;
 }
 
-export interface EventCreateWithoutUsersInput {
-  eventId: Int;
+export interface EventCreateWithoutUserInput {
+  nodeId: String;
 }
 
 export interface UserUpdateInput {
   email?: String;
   password?: String;
   name?: String;
-  events?: EventUpdateManyWithoutUsersInput;
+  events?: EventUpdateManyWithoutUserInput;
 }
 
-export interface EventUpdateManyWithoutUsersInput {
-  create?: EventCreateWithoutUsersInput[] | EventCreateWithoutUsersInput;
+export interface EventUpdateManyWithoutUserInput {
+  create?: EventCreateWithoutUserInput[] | EventCreateWithoutUserInput;
   delete?: EventWhereUniqueInput[] | EventWhereUniqueInput;
   connect?: EventWhereUniqueInput[] | EventWhereUniqueInput;
   set?: EventWhereUniqueInput[] | EventWhereUniqueInput;
   disconnect?: EventWhereUniqueInput[] | EventWhereUniqueInput;
   update?:
-    | EventUpdateWithWhereUniqueWithoutUsersInput[]
-    | EventUpdateWithWhereUniqueWithoutUsersInput;
+    | EventUpdateWithWhereUniqueWithoutUserInput[]
+    | EventUpdateWithWhereUniqueWithoutUserInput;
   upsert?:
-    | EventUpsertWithWhereUniqueWithoutUsersInput[]
-    | EventUpsertWithWhereUniqueWithoutUsersInput;
+    | EventUpsertWithWhereUniqueWithoutUserInput[]
+    | EventUpsertWithWhereUniqueWithoutUserInput;
   deleteMany?: EventScalarWhereInput[] | EventScalarWhereInput;
   updateMany?:
     | EventUpdateManyWithWhereNestedInput[]
     | EventUpdateManyWithWhereNestedInput;
 }
 
-export interface EventUpdateWithWhereUniqueWithoutUsersInput {
+export interface EventUpdateWithWhereUniqueWithoutUserInput {
   where: EventWhereUniqueInput;
-  data: EventUpdateWithoutUsersDataInput;
+  data: EventUpdateWithoutUserDataInput;
 }
 
-export interface EventUpdateWithoutUsersDataInput {
-  eventId?: Int;
+export interface EventUpdateWithoutUserDataInput {
+  nodeId?: String;
 }
 
-export interface EventUpsertWithWhereUniqueWithoutUsersInput {
+export interface EventUpsertWithWhereUniqueWithoutUserInput {
   where: EventWhereUniqueInput;
-  update: EventUpdateWithoutUsersDataInput;
-  create: EventCreateWithoutUsersInput;
+  update: EventUpdateWithoutUserDataInput;
+  create: EventCreateWithoutUserInput;
 }
 
 export interface EventScalarWhereInput {
-  id?: ID_Input;
-  id_not?: ID_Input;
-  id_in?: ID_Input[] | ID_Input;
-  id_not_in?: ID_Input[] | ID_Input;
-  id_lt?: ID_Input;
-  id_lte?: ID_Input;
-  id_gt?: ID_Input;
-  id_gte?: ID_Input;
-  id_contains?: ID_Input;
-  id_not_contains?: ID_Input;
-  id_starts_with?: ID_Input;
-  id_not_starts_with?: ID_Input;
-  id_ends_with?: ID_Input;
-  id_not_ends_with?: ID_Input;
-  eventId?: Int;
-  eventId_not?: Int;
-  eventId_in?: Int[] | Int;
-  eventId_not_in?: Int[] | Int;
-  eventId_lt?: Int;
-  eventId_lte?: Int;
-  eventId_gt?: Int;
-  eventId_gte?: Int;
+  nodeId?: String;
+  nodeId_not?: String;
+  nodeId_in?: String[] | String;
+  nodeId_not_in?: String[] | String;
+  nodeId_lt?: String;
+  nodeId_lte?: String;
+  nodeId_gt?: String;
+  nodeId_gte?: String;
+  nodeId_contains?: String;
+  nodeId_not_contains?: String;
+  nodeId_starts_with?: String;
+  nodeId_not_starts_with?: String;
+  nodeId_ends_with?: String;
+  nodeId_not_ends_with?: String;
   AND?: EventScalarWhereInput[] | EventScalarWhereInput;
   OR?: EventScalarWhereInput[] | EventScalarWhereInput;
   NOT?: EventScalarWhereInput[] | EventScalarWhereInput;
@@ -500,7 +392,7 @@ export interface EventUpdateManyWithWhereNestedInput {
 }
 
 export interface EventUpdateManyDataInput {
-  eventId?: Int;
+  nodeId?: String;
 }
 
 export interface UserUpdateManyMutationInput {
@@ -536,42 +428,19 @@ export interface NodeNode {
 }
 
 export interface Event {
-  id: ID_Output;
-  eventId: Int;
+  nodeId: String;
 }
 
 export interface EventPromise extends Promise<Event>, Fragmentable {
-  id: () => Promise<ID_Output>;
-  eventId: () => Promise<Int>;
-  users: <T = FragmentableArray<User>>(
-    args?: {
-      where?: UserWhereInput;
-      orderBy?: UserOrderByInput;
-      skip?: Int;
-      after?: String;
-      before?: String;
-      first?: Int;
-      last?: Int;
-    }
-  ) => T;
+  nodeId: () => Promise<String>;
+  user: <T = UserPromise>() => T;
 }
 
 export interface EventSubscription
   extends Promise<AsyncIterator<Event>>,
     Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  eventId: () => Promise<AsyncIterator<Int>>;
-  users: <T = Promise<AsyncIterator<UserSubscription>>>(
-    args?: {
-      where?: UserWhereInput;
-      orderBy?: UserOrderByInput;
-      skip?: Int;
-      after?: String;
-      before?: String;
-      first?: Int;
-      last?: Int;
-    }
-  ) => T;
+  nodeId: () => Promise<AsyncIterator<String>>;
+  user: <T = UserSubscription>() => T;
 }
 
 export interface User {
@@ -792,22 +661,19 @@ export interface EventSubscriptionPayloadSubscription
 }
 
 export interface EventPreviousValues {
-  id: ID_Output;
-  eventId: Int;
+  nodeId: String;
 }
 
 export interface EventPreviousValuesPromise
   extends Promise<EventPreviousValues>,
     Fragmentable {
-  id: () => Promise<ID_Output>;
-  eventId: () => Promise<Int>;
+  nodeId: () => Promise<String>;
 }
 
 export interface EventPreviousValuesSubscription
   extends Promise<AsyncIterator<EventPreviousValues>>,
     Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  eventId: () => Promise<AsyncIterator<Int>>;
+  nodeId: () => Promise<AsyncIterator<String>>;
 }
 
 export interface UserSubscriptionPayload {
@@ -861,6 +727,11 @@ export interface UserPreviousValuesSubscription
 }
 
 /*
+The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.
+*/
+export type String = string;
+
+/*
 The `ID` scalar type represents a unique identifier, often used to refetch an object or as key for a cache. The ID type appears in a JSON response as a String; however, it is not intended to be human-readable. When expected as an input type, any string (such as `"4"`) or integer (such as `4`) input value will be accepted as an ID.
 */
 export type ID_Input = string | number;
@@ -870,11 +741,6 @@ export type ID_Output = string;
 The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1. 
 */
 export type Int = number;
-
-/*
-The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.
-*/
-export type String = string;
 
 /*
 The `Boolean` scalar type represents `true` or `false`.

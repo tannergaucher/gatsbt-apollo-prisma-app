@@ -3,7 +3,12 @@ import { Query } from 'react-apollo'
 import { CURRENT_USER_QUERY } from './User'
 import Signin from './Signin'
 import Signup from './Signup'
-import { Flex, Heading } from 'rebass'
+import styled from 'styled-components'
+
+const Styled = styled.div`
+  display: flex;
+  justify-content: center;
+`
 
 const PleaseSignin = props => (
   <Query query={CURRENT_USER_QUERY}>
@@ -12,11 +17,10 @@ const PleaseSignin = props => (
       if (!data.me) {
         return (
           <>
-            <Heading mt={4}>Please sign in</Heading>
-            <Flex mt={4}>
+            <Styled>
               <Signin />
               <Signup />
-            </Flex>
+            </Styled>
           </>
         )
       }

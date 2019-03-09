@@ -5,7 +5,7 @@ const WithFAB = styled.div`
   position: relative;
   .absolute {
     position: absolute;
-    bottom: -2%;
+    top: -2%;
     right: -2%;
   }
 `

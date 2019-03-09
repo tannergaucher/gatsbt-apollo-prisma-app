@@ -21,18 +21,16 @@ const going = ({ data }) => {
             if (error) return <p>{error.message}</p>
             if (!data.me) return <p>No data.me</p>
 
-            // TODO: abstract to util function
-
             // 1. push user eventIds to an array
             const { events } = data.me
-            const eventIds = []
-            events.map(event => eventIds.push(event.eventId))
+            const nodeIds = []
+            events.map(event => nodeIds.push(event.nodeId))
 
             // 2. map all events from page query, if user has that event, push it to array
             const isUserEventNode = []
             allEvents.map(edge => {
-              const { id } = edge.node.frontmatter
-              if (eventIds.indexOf(id) !== -1) {
+              const { id } = edge.node
+              if (nodeIds.indexOf(id) !== -1) {
                 isUserEventNode.push(edge)
               }
             })
@@ -46,7 +44,6 @@ const going = ({ data }) => {
                     fields: { slug },
                     frontmatter: {
                       title,
-                      id: eventId,
                       featuredImage: {
                         childImageSharp: { fluid },
                       },
@@ -59,7 +56,7 @@ const going = ({ data }) => {
                         <Card title={title} fluid={fluid} />
                       </Link>
                       <div className="absolute">
-                        <RemoveEvent eventId={eventId} />
+                        <RemoveEvent nodeId={id} />
                       </div>
                     </WithFAB>
                   )
@@ -86,7 +83,6 @@ export const goingQuery = graphql`
           }
           frontmatter {
             title
-            id
             featuredImage {
               childImageSharp {
                 fluid {

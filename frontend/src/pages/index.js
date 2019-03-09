@@ -6,7 +6,7 @@ import Link from '../components/styles/Link'
 import FilterLinks from '../components/FilterLinks'
 
 const Styled = styled.div`
-  margin-bottom: ${props => props.theme.spacing};
+  margin-bottom: 4em;
 `
 
 const IndexPage = ({ data }) => {
@@ -17,9 +17,9 @@ const IndexPage = ({ data }) => {
       {edges.map(edge => {
         const {
           node: {
+            id,
             frontmatter: {
               title,
-              id,
               featuredImage: {
                 childImageSharp: { fluid },
               },
@@ -47,12 +47,12 @@ export const indexPageQuery = graphql`
     allMarkdownRemark {
       edges {
         node {
+          id
           fields {
             slug
           }
           frontmatter {
             title
-            id
             featuredImage {
               childImageSharp {
                 fluid {

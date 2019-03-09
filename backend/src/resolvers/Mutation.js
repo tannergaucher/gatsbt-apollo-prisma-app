@@ -53,55 +53,41 @@ const Mutation = {
 
     return { message: 'Goodbye' }
   },
-  addEvent: async (parent, { eventId }, context) => {
+
+  addEvent: async (parent, { nodeId }, context) => {
     const userId = getUserId(context)
 
     if (!userId) {
       throw new AuthError()
     }
 
-    // update related nodes type User and Type Event
-    return context.prisma.updateUser({
-      where: {
-        id: userId,
-      },
-      data: {
-        events: {
-          create: [
-            {
-              eventId,
-            },
-          ],
+    const event = await context.prisma.createEvent({
+      nodeId: nodeId,
+      user: {
+        connect: {
+          id: userId,
         },
       },
     })
+
+    return event
   },
-  removeEvent: async (parent, { eventId }, context) => {
+  removeEvent: async (parent, { nodeId }, context) => {
     const userId = getUserId(context)
 
     if (!userId) {
       throw new AuthError()
     }
 
-    const [existingEvent] = await context.prisma.user({ id: userId }).events({
-      where: {
-        eventId: eventId,
-      },
-    })
+    // TODO: check that user owns the event first
+    // const [existingEvent] = await context.prisma.user({ id: userId }).events({
+    //   where: {
+    //     nodeId: nodeId,
+    //   },
+    // })
 
-    return context.prisma.updateUser({
-      where: {
-        id: userId,
-      },
-      data: {
-        events: {
-          delete: [
-            {
-              id: existingEvent.id,
-            },
-          ],
-        },
-      },
+    return context.prisma.deleteEvent({
+      nodeId: nodeId,
     })
   },
 }

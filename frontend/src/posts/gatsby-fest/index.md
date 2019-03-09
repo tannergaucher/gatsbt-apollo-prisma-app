@@ -1,6 +1,5 @@
 ---
 title: 'Gatsby Fest'
-id: 4
 featuredImage: './featured.jpg'
 ---
 

@@ -7,5 +7,6 @@ const Input = styled.input`
   font-size: 16px;
   padding: 0.5em;
   border-radius: ${props => props.theme.radius};
+  margin-bottom: ${props => props.theme.spacing};
 `
 export default Input

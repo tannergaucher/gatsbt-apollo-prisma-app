@@ -1,6 +1,5 @@
 ---
 title: 'Concert'
-id: 3
 featuredImage: './featured.jpg'
 ---
 

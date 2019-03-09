@@ -6,9 +6,7 @@ import User from '../containers/User'
 import Card from '../components/Card'
 import Link from '../components/styles/Link'
 import FilterLinks from '../components/FilterLinks'
-
 import AddEvent from '../containers/AddEvent'
-
 import WithFAB from '../components/styles/WithFAB'
 
 const notGoing = ({ data }) => {
@@ -23,16 +21,13 @@ const notGoing = ({ data }) => {
             if (!data.me) return <p>no data.me</p>
 
             const { events } = data.me
-
-            // todo: abstract to notUserEvents util func
-
-            const eventIds = []
-            events.map(event => eventIds.push(event.eventId))
+            const nodeIds = []
+            events.map(event => nodeIds.push(event.nodeId))
 
             const isNotUserEventNode = []
             allEvents.map(edge => {
-              const { id } = edge.node.frontmatter
-              if (eventIds.indexOf(id) === -1) {
+              const { id } = edge.node
+              if (nodeIds.indexOf(id) === -1) {
                 isNotUserEventNode.push(edge)
               }
             })
@@ -46,7 +41,6 @@ const notGoing = ({ data }) => {
                     fields: { slug },
                     frontmatter: {
                       title,
-                      id: eventId,
                       featuredImage: {
                         childImageSharp: { fluid },
                       },
@@ -59,7 +53,7 @@ const notGoing = ({ data }) => {
                         <Card title={title} fluid={fluid} />
                       </Link>
                       <div className="absolute">
-                        <AddEvent eventId={eventId} />
+                        <AddEvent nodeId={id} />
                       </div>
                     </WithFAB>
                   )
@@ -86,7 +80,6 @@ export const notGoingQuery = graphql`
           }
           frontmatter {
             title
-            id
             featuredImage {
               childImageSharp {
                 fluid {

@@ -1,7 +1,6 @@
 type Event {
-  id: ID! @unique
-  eventId: Int!
-  users: [User!]
+  nodeId: String! @unique
+  user: User!
 }
 
 type User {
