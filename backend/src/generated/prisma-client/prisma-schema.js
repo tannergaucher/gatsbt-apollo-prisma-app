@@ -16,6 +16,7 @@ type BatchPayload {
 }
 
 type Event {
+  id: ID!
   nodeId: String!
   user: User!
 }
@@ -46,10 +47,10 @@ type EventEdge {
 }
 
 enum EventOrderByInput {
-  nodeId_ASC
-  nodeId_DESC
   id_ASC
   id_DESC
+  nodeId_ASC
+  nodeId_DESC
   createdAt_ASC
   createdAt_DESC
   updatedAt_ASC
@@ -57,10 +58,25 @@ enum EventOrderByInput {
 }
 
 type EventPreviousValues {
+  id: ID!
   nodeId: String!
 }
 
 input EventScalarWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
   nodeId: String
   nodeId_not: String
   nodeId_in: [String!]
@@ -144,6 +160,20 @@ input EventUpsertWithWhereUniqueWithoutUserInput {
 }
 
 input EventWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
   nodeId: String
   nodeId_not: String
   nodeId_in: [String!]
@@ -165,6 +195,7 @@ input EventWhereInput {
 }
 
 input EventWhereUniqueInput {
+  id: ID
   nodeId: String
 }
 

@@ -147,10 +147,10 @@ export interface ClientConstructor<T> {
  */
 
 export type EventOrderByInput =
-  | "nodeId_ASC"
-  | "nodeId_DESC"
   | "id_ASC"
   | "id_DESC"
+  | "nodeId_ASC"
+  | "nodeId_DESC"
   | "createdAt_ASC"
   | "createdAt_DESC"
   | "updatedAt_ASC"
@@ -173,10 +173,25 @@ export type UserOrderByInput =
 export type MutationType = "CREATED" | "UPDATED" | "DELETED";
 
 export type EventWhereUniqueInput = AtLeastOne<{
-  nodeId: String;
+  id: ID_Input;
+  nodeId?: String;
 }>;
 
 export interface EventWhereInput {
+  id?: ID_Input;
+  id_not?: ID_Input;
+  id_in?: ID_Input[] | ID_Input;
+  id_not_in?: ID_Input[] | ID_Input;
+  id_lt?: ID_Input;
+  id_lte?: ID_Input;
+  id_gt?: ID_Input;
+  id_gte?: ID_Input;
+  id_contains?: ID_Input;
+  id_not_contains?: ID_Input;
+  id_starts_with?: ID_Input;
+  id_not_starts_with?: ID_Input;
+  id_ends_with?: ID_Input;
+  id_not_ends_with?: ID_Input;
   nodeId?: String;
   nodeId_not?: String;
   nodeId_in?: String[] | String;
@@ -367,6 +382,20 @@ export interface EventUpsertWithWhereUniqueWithoutUserInput {
 }
 
 export interface EventScalarWhereInput {
+  id?: ID_Input;
+  id_not?: ID_Input;
+  id_in?: ID_Input[] | ID_Input;
+  id_not_in?: ID_Input[] | ID_Input;
+  id_lt?: ID_Input;
+  id_lte?: ID_Input;
+  id_gt?: ID_Input;
+  id_gte?: ID_Input;
+  id_contains?: ID_Input;
+  id_not_contains?: ID_Input;
+  id_starts_with?: ID_Input;
+  id_not_starts_with?: ID_Input;
+  id_ends_with?: ID_Input;
+  id_not_ends_with?: ID_Input;
   nodeId?: String;
   nodeId_not?: String;
   nodeId_in?: String[] | String;
@@ -428,10 +457,12 @@ export interface NodeNode {
 }
 
 export interface Event {
+  id: ID_Output;
   nodeId: String;
 }
 
 export interface EventPromise extends Promise<Event>, Fragmentable {
+  id: () => Promise<ID_Output>;
   nodeId: () => Promise<String>;
   user: <T = UserPromise>() => T;
 }
@@ -439,6 +470,7 @@ export interface EventPromise extends Promise<Event>, Fragmentable {
 export interface EventSubscription
   extends Promise<AsyncIterator<Event>>,
     Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
   nodeId: () => Promise<AsyncIterator<String>>;
   user: <T = UserSubscription>() => T;
 }
@@ -661,18 +693,21 @@ export interface EventSubscriptionPayloadSubscription
 }
 
 export interface EventPreviousValues {
+  id: ID_Output;
   nodeId: String;
 }
 
 export interface EventPreviousValuesPromise
   extends Promise<EventPreviousValues>,
     Fragmentable {
+  id: () => Promise<ID_Output>;
   nodeId: () => Promise<String>;
 }
 
 export interface EventPreviousValuesSubscription
   extends Promise<AsyncIterator<EventPreviousValues>>,
     Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
   nodeId: () => Promise<AsyncIterator<String>>;
 }
 
@@ -727,15 +762,15 @@ export interface UserPreviousValuesSubscription
 }
 
 /*
-The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.
-*/
-export type String = string;
-
-/*
 The `ID` scalar type represents a unique identifier, often used to refetch an object or as key for a cache. The ID type appears in a JSON response as a String; however, it is not intended to be human-readable. When expected as an input type, any string (such as `"4"`) or integer (such as `4`) input value will be accepted as an ID.
 */
 export type ID_Input = string | number;
 export type ID_Output = string;
+
+/*
+The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.
+*/
+export type String = string;
 
 /*
 The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1. 

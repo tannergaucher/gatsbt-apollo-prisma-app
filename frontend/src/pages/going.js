@@ -9,6 +9,7 @@ import Link from '../components/styles/Link'
 import FilterLinks from '../components/FilterLinks'
 import RemoveEvent from '../containers/RemoveEvent'
 import WithFAB from '../components/styles/WithFAB'
+import userEventNodes from '../utils/userEventNodes'
 
 const going = ({ data }) => {
   const allEvents = data.allMarkdownRemark.edges
@@ -21,24 +22,12 @@ const going = ({ data }) => {
             if (error) return <p>{error.message}</p>
             if (!data.me) return <p>No data.me</p>
 
-            // 1. push user eventIds to an array
             const { events } = data.me
-            const nodeIds = []
-            events.map(event => nodeIds.push(event.nodeId))
-
-            // 2. map all events from page query, if user has that event, push it to array
-            const isUserEventNode = []
-            allEvents.map(edge => {
-              const { id } = edge.node
-              if (nodeIds.indexOf(id) !== -1) {
-                isUserEventNode.push(edge)
-              }
-            })
 
             return (
               <>
                 <FilterLinks />
-                {isUserEventNode.map(userEvent => {
+                {userEventNodes(events, allEvents).map(userEvent => {
                   const {
                     id,
                     fields: { slug },

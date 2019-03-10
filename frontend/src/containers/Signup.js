@@ -6,7 +6,7 @@ import { navigate } from '@reach/router'
 import Error from '../components/Error'
 import Fieldset from '../components/styles/Fieldset'
 import Input from '../components/styles/Input'
-import { Button, Box } from 'rebass'
+import { Button } from 'rebass'
 
 const SIGNUP_MUTATION = gql`
   mutation SIGNUP_MUTATION(
@@ -47,8 +47,8 @@ class Signup extends React.Component {
             <form
               onSubmit={async e => {
                 e.preventDefault()
-                const res = await signup()
-                // change to last page from history
+                await signup()
+                // TODO change to last page from history
                 navigate('/')
               }}
             >

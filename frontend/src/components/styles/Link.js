@@ -1,12 +1,11 @@
 import styled from 'styled-components'
 import Link from 'gatsby-link'
-import { space, fontWeight } from 'styled-system'
+import { space } from 'styled-system'
 
 const MyLink = styled(Link)`
   ${space};
-  ${fontWeight};
-  color: ${props => (props.active ? 'palevioletred' : props.theme.black)};
   text-decoration: none;
+  color: ${props => (props.active === 'active' ? 'blue' : 'black')};
 `
 
 export default MyLink

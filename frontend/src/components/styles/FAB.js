@@ -7,13 +7,13 @@ const FAB = styled.button`
   height: 55px;
   width: 55px;
   border-radius: 50%;
-  background: white;
-  color: black;
+  background: rgba(0, 0, 0, 0.9);
+  color: white;
   border: none;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.05);
-  font-size: 16px;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.06);
+  font-size: 24px;
   transition: 0.2s ease-in-out;
+  opacity: 0.97;
 
   &:hover {
     transition: 0.2s ease-in-out;
@@ -22,8 +22,8 @@ const FAB = styled.button`
 
   &:focus {
     border-radius: 50%;
-    background: palevioletred;
-    color: white;
+    background: white;
+    color: black;
     transition: 0.4s ease-in-out;
   }
 `

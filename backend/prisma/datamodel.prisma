@@ -1,4 +1,5 @@
 type Event {
+  id: ID! @unique
   nodeId: String! @unique
   user: User!
 }

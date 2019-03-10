@@ -9,8 +9,13 @@ import FilterLinks from '../components/FilterLinks'
 import AddEvent from '../containers/AddEvent'
 import WithFAB from '../components/styles/WithFAB'
 
-const notGoing = ({ data }) => {
-  const allEvents = data.allMarkdownRemark.edges
+import notUserEventNodes from '../utils/notUserEventNodes'
+
+const notGoing = ({
+  data: {
+    allMarkdownRemark: { edges: allEvents },
+  },
+}) => {
   return (
     <Layout>
       <PleaseSignin>
@@ -21,21 +26,11 @@ const notGoing = ({ data }) => {
             if (!data.me) return <p>no data.me</p>
 
             const { events } = data.me
-            const nodeIds = []
-            events.map(event => nodeIds.push(event.nodeId))
-
-            const isNotUserEventNode = []
-            allEvents.map(edge => {
-              const { id } = edge.node
-              if (nodeIds.indexOf(id) === -1) {
-                isNotUserEventNode.push(edge)
-              }
-            })
 
             return (
               <>
                 <FilterLinks />
-                {isNotUserEventNode.map(notUserEvent => {
+                {notUserEventNodes(events, allEvents).map(notUserEvent => {
                   const {
                     id,
                     fields: { slug },

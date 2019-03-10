@@ -23,7 +23,6 @@ export const client = new ApolloClient({
 
 cache.writeData({
   data: {
-    filterLink: 'All',
-    currentPath: '',
+    // isLoggedIn: '',
   },
 })
