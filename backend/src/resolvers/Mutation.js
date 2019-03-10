@@ -79,15 +79,14 @@ const Mutation = {
       throw new AuthError()
     }
 
-    // TODO: check that user owns the event first
-    // const [existingEvent] = await context.prisma.user({ id: userId }).events({
-    //   where: {
-    //     nodeId: nodeId,
-    //   },
-    // })
+    const [existingEvent] = await context.prisma.user({ id: userId }).events({
+      where: {
+        nodeId: nodeId,
+      },
+    })
 
     return context.prisma.deleteEvent({
-      nodeId: nodeId,
+      id: existingEvent.id,
     })
   },
 }

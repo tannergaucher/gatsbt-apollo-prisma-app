@@ -196,7 +196,6 @@ input EventWhereInput {
 
 input EventWhereUniqueInput {
   id: ID
-  nodeId: String
 }
 
 scalar Long

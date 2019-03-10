@@ -5,7 +5,7 @@ import Signout from '../containers/Signout'
 import User from '../containers/User'
 import Link from '../components/styles/Link'
 
-const Styled = styled.div`
+const Styled = styled.nav`
   display: flex;
   justify-content: space-between;
   background: #f6f6ff;

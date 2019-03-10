@@ -174,7 +174,6 @@ export type MutationType = "CREATED" | "UPDATED" | "DELETED";
 
 export type EventWhereUniqueInput = AtLeastOne<{
   id: ID_Input;
-  nodeId?: String;
 }>;
 
 export interface EventWhereInput {
