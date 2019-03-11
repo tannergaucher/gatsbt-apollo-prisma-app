@@ -5,6 +5,8 @@ featuredImage: './featured.jpg'
 
 Lorem ipsum dolor sit amet, et antiopam conceptam eam, vis at unum lobortis indoctum. Pro cu debet utroque nominati, porro iriure sea ad. Placerat sententiae et ius, eos in facilis offendit. Mea ea nullam appetere. Et etiam altera eos, veri tritani nostrum ea sea. Vim ludus tritani ne, an nemore aeterno vix, cu omnis brute has.
 
+Cool.
+
 Ne est alii facilisis, everti feugait per ea, ad lucilius atomorum sea. Debet doming suscipit ex pri, mea no assum debet. Autem instructior eu pri, suas aeque dictas in duo. No quidam vivendo cum, no facilisi consulatu ius, ludus copiosae eam ne.
 
 Est ea alterum nominavi gloriatur. Has ne saepe semper scaevola, te iuvaret indoctum scribentur mel, agam nostrud bonorum sed at. Ea ius primis contentiones. Vocent posidonium vix et, eu essent utroque debitis sed.

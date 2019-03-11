@@ -8,12 +8,17 @@ import Link from '../components/styles/Link'
 const Styled = styled.nav`
   display: flex;
   justify-content: space-between;
-  background: #f6f6ff;
+  background: ${props => props.theme.black};
+  color: white;
   box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.1);
   position: sticky;
   top: 0;
   z-index: 3;
   padding: 0 2em;
+
+  h4 {
+    color: white;
+  }
 `
 
 const Nav = () => (

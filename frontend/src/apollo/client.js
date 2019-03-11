@@ -24,5 +24,6 @@ export const client = new ApolloClient({
 cache.writeData({
   data: {
     // isLoggedIn: '',
+    userEvents: [],
   },
 })

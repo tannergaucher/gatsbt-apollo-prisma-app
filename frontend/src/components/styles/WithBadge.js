@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-const WithFAB = styled.div`
+const WithBadge = styled.div`
   margin-bottom: 4em;
   position: relative;
   .absolute {
@@ -10,4 +10,4 @@ const WithFAB = styled.div`
   }
 `
 
-export default WithFAB
+export default WithBadge

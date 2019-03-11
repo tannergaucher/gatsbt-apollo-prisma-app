@@ -1,20 +1,25 @@
 import React from 'react'
-import styled from 'styled-components'
+import { Query } from 'react-apollo'
+
 import Layout from '../components/layout'
 import Card from '../components/Card'
 import Link from '../components/styles/Link'
 import FilterLinks from '../components/FilterLinks'
+import WithBadge from '../components/styles/WithBadge'
+import AddEvent from '../containers/AddEvent'
+import RemoveEvent from '../containers/RemoveEvent'
+import { CURRENT_USER_QUERY } from '../containers/User'
 
-const Styled = styled.div`
-  margin-bottom: 4em;
-`
-
-const IndexPage = ({ data }) => {
-  const { edges } = data.allMarkdownRemark
+const IndexPage = ({
+  data: {
+    allMarkdownRemark: { edges: allEvents },
+  },
+}) => {
   return (
     <Layout>
       <FilterLinks />
-      {edges.map(edge => {
+
+      {allEvents.map(edge => {
         const {
           node: {
             id,
@@ -27,13 +32,17 @@ const IndexPage = ({ data }) => {
             fields: { slug },
           },
         } = edge
+        // Decide if a person is going here
 
         return (
-          <Styled key={id}>
+          <WithBadge key={id}>
             <Link to={slug} none="true">
               <Card title={title} fluid={fluid} />
             </Link>
-          </Styled>
+
+            {/* if the user is going, display <RemoveEvent className="absolute"/ > */}
+            {/* if the user isn't going, display <AddEvent className="absolute"/ > */}
+          </WithBadge>
         )
       })}
     </Layout>

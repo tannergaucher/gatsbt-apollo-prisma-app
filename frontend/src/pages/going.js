@@ -8,11 +8,14 @@ import Card from '../components/Card'
 import Link from '../components/styles/Link'
 import FilterLinks from '../components/FilterLinks'
 import RemoveEvent from '../containers/RemoveEvent'
-import WithFAB from '../components/styles/WithFAB'
+import WithBadge from '../components/styles/WithBadge'
 import userEventNodes from '../utils/userEventNodes'
 
-const going = ({ data }) => {
-  const allEvents = data.allMarkdownRemark.edges
+const going = ({
+  data: {
+    allMarkdownRemark: { edges: allEvents },
+  },
+}) => {
   return (
     <Layout>
       <PleaseSignin>
@@ -40,14 +43,14 @@ const going = ({ data }) => {
                   } = userEvent.node
 
                   return (
-                    <WithFAB key={id}>
+                    <WithBadge key={id}>
                       <Link to={slug} none="true">
                         <Card title={title} fluid={fluid} />
                       </Link>
                       <div className="absolute">
                         <RemoveEvent nodeId={id} />
                       </div>
-                    </WithFAB>
+                    </WithBadge>
                   )
                 })}
               </>

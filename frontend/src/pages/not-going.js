@@ -7,7 +7,7 @@ import Card from '../components/Card'
 import Link from '../components/styles/Link'
 import FilterLinks from '../components/FilterLinks'
 import AddEvent from '../containers/AddEvent'
-import WithFAB from '../components/styles/WithFAB'
+import WithBadge from '../components/styles/WithBadge'
 
 import notUserEventNodes from '../utils/notUserEventNodes'
 
@@ -43,14 +43,18 @@ const notGoing = ({
                   } = notUserEvent.node
 
                   return (
-                    <WithFAB key={id}>
+                    // replace all of this with just <Card/>
+
+                    // card does the isGoing Query
+
+                    <WithBadge key={id}>
                       <Link to={slug} key={id} none="true">
                         <Card title={title} fluid={fluid} />
                       </Link>
                       <div className="absolute">
                         <AddEvent nodeId={id} />
                       </div>
-                    </WithFAB>
+                    </WithBadge>
                   )
                 })}
               </>

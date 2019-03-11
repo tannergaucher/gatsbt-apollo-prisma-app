@@ -16,6 +16,10 @@ const Styled = styled.div`
   }
 `
 
+// card queries client state, displays going or isNotGoing
+
+// default client state is  set to false
+
 const Card = ({ title, fluid }) => (
   <Styled>
     <h2>{title}</h2>
