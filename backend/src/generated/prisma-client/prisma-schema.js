@@ -17,7 +17,7 @@ type BatchPayload {
 
 type Event {
   id: ID!
-  nodeId: String!
+  postId: Int!
   user: User!
 }
 
@@ -28,7 +28,7 @@ type EventConnection {
 }
 
 input EventCreateInput {
-  nodeId: String!
+  postId: Int!
   user: UserCreateOneWithoutEventsInput!
 }
 
@@ -38,7 +38,7 @@ input EventCreateManyWithoutUserInput {
 }
 
 input EventCreateWithoutUserInput {
-  nodeId: String!
+  postId: Int!
 }
 
 type EventEdge {
@@ -49,8 +49,8 @@ type EventEdge {
 enum EventOrderByInput {
   id_ASC
   id_DESC
-  nodeId_ASC
-  nodeId_DESC
+  postId_ASC
+  postId_DESC
   createdAt_ASC
   createdAt_DESC
   updatedAt_ASC
@@ -59,7 +59,7 @@ enum EventOrderByInput {
 
 type EventPreviousValues {
   id: ID!
-  nodeId: String!
+  postId: Int!
 }
 
 input EventScalarWhereInput {
@@ -77,20 +77,14 @@ input EventScalarWhereInput {
   id_not_starts_with: ID
   id_ends_with: ID
   id_not_ends_with: ID
-  nodeId: String
-  nodeId_not: String
-  nodeId_in: [String!]
-  nodeId_not_in: [String!]
-  nodeId_lt: String
-  nodeId_lte: String
-  nodeId_gt: String
-  nodeId_gte: String
-  nodeId_contains: String
-  nodeId_not_contains: String
-  nodeId_starts_with: String
-  nodeId_not_starts_with: String
-  nodeId_ends_with: String
-  nodeId_not_ends_with: String
+  postId: Int
+  postId_not: Int
+  postId_in: [Int!]
+  postId_not_in: [Int!]
+  postId_lt: Int
+  postId_lte: Int
+  postId_gt: Int
+  postId_gte: Int
   AND: [EventScalarWhereInput!]
   OR: [EventScalarWhereInput!]
   NOT: [EventScalarWhereInput!]
@@ -115,16 +109,16 @@ input EventSubscriptionWhereInput {
 }
 
 input EventUpdateInput {
-  nodeId: String
+  postId: Int
   user: UserUpdateOneRequiredWithoutEventsInput
 }
 
 input EventUpdateManyDataInput {
-  nodeId: String
+  postId: Int
 }
 
 input EventUpdateManyMutationInput {
-  nodeId: String
+  postId: Int
 }
 
 input EventUpdateManyWithoutUserInput {
@@ -145,7 +139,7 @@ input EventUpdateManyWithWhereNestedInput {
 }
 
 input EventUpdateWithoutUserDataInput {
-  nodeId: String
+  postId: Int
 }
 
 input EventUpdateWithWhereUniqueWithoutUserInput {
@@ -174,20 +168,14 @@ input EventWhereInput {
   id_not_starts_with: ID
   id_ends_with: ID
   id_not_ends_with: ID
-  nodeId: String
-  nodeId_not: String
-  nodeId_in: [String!]
-  nodeId_not_in: [String!]
-  nodeId_lt: String
-  nodeId_lte: String
-  nodeId_gt: String
-  nodeId_gte: String
-  nodeId_contains: String
-  nodeId_not_contains: String
-  nodeId_starts_with: String
-  nodeId_not_starts_with: String
-  nodeId_ends_with: String
-  nodeId_not_ends_with: String
+  postId: Int
+  postId_not: Int
+  postId_in: [Int!]
+  postId_not_in: [Int!]
+  postId_lt: Int
+  postId_lte: Int
+  postId_gt: Int
+  postId_gte: Int
   user: UserWhereInput
   AND: [EventWhereInput!]
   OR: [EventWhereInput!]

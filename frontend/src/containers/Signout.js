@@ -1,5 +1,5 @@
 import React from 'react'
-import { Mutation } from 'react-apollo'
+import { useMutation } from 'react-apollo-hooks'
 import gql from 'graphql-tag'
 
 import Link from '../components/styles/Link'
@@ -15,20 +15,15 @@ const SIGN_OUT_MUTATION = gql`
 `
 
 const Signout = () => {
+  const signout = useMutation(SIGN_OUT_MUTATION, {
+    refetchQueries: [{ query: CURRENT_USER_QUERY }],
+    update: () => client.resetStore(),
+  })
+
   return (
-    <Mutation
-      mutation={SIGN_OUT_MUTATION}
-      refetchQueries={[{ query: CURRENT_USER_QUERY }]}
-      update={() => {
-        client.resetStore()
-      }}
-    >
-      {signout => (
-        <Link onClick={signout} none="true" to="/">
-          <h4>Sign out</h4>
-        </Link>
-      )}
-    </Mutation>
+    <Link onClick={signout} none="true" to="/">
+      <h4>Sign Out</h4>
+    </Link>
   )
 }
 

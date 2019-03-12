@@ -5,76 +5,72 @@ import Layout from '../components/layout'
 import User from '../containers/User'
 import PleaseSignin from '../containers/PleaseSignin'
 import Card from '../components/Card'
-import Link from '../components/styles/Link'
 import FilterLinks from '../components/FilterLinks'
-import RemoveEvent from '../containers/RemoveEvent'
-import WithBadge from '../components/styles/WithBadge'
-import userEventNodes from '../utils/userEventNodes'
 
 const going = ({
   data: {
     allMarkdownRemark: { edges: allEvents },
   },
-}) => {
-  return (
-    <Layout>
-      <PleaseSignin>
-        <User>
-          {({ data, loading, error }) => {
-            if (loading) return <p>loading...</p>
-            if (error) return <p>{error.message}</p>
-            if (!data.me) return <p>No data.me</p>
+}) => (
+  <Layout>
+    <PleaseSignin>
+      <User>
+        {({ data, loading, error }) => {
+          if (loading) return <p>loading...</p>
+          if (error) return <p>{error.message}</p>
+          const { events } = data.me
 
-            const { events } = data.me
+          // filter all events for event postId === userEvent postId
+          // this must be done client side, because gatsby static query does not take variables
 
-            return (
-              <>
-                <FilterLinks />
-                {userEventNodes(events, allEvents).map(userEvent => {
-                  const {
+          const going = events.map(event => {
+            const goingNodes = []
+            allEvents.filter(allEvent => {
+              if (allEvent.node.frontmatter.id === event.postId) {
+                goingNodes.push(allEvent)
+              }
+            })
+            return goingNodes
+          })
+
+          return (
+            <>
+              <FilterLinks />
+              {going.map(event => {
+                const {
+                  fields: slug,
+                  frontmatter: {
+                    title,
                     id,
-                    fields: { slug },
-                    frontmatter: {
-                      title,
-                      featuredImage: {
-                        childImageSharp: { fluid },
-                      },
+                    featuredImage: {
+                      childImageSharp: { fluid },
                     },
-                  } = userEvent.node
-
-                  return (
-                    <WithBadge key={id}>
-                      <Link to={slug} none="true">
-                        <Card title={title} fluid={fluid} />
-                      </Link>
-                      <div className="absolute">
-                        <RemoveEvent nodeId={id} />
-                      </div>
-                    </WithBadge>
-                  )
-                })}
-              </>
-            )
-          }}
-        </User>
-      </PleaseSignin>
-    </Layout>
-  )
-}
+                  },
+                } = event[0].node
+                // prettier-ignore
+                return  <Card title={title} fluid={fluid} postId={id} slug={slug.slug} key={id} />
+              })}
+            </>
+          )
+        }}
+      </User>
+    </PleaseSignin>
+  </Layout>
+)
 
 export default going
 
-export const goingQuery = graphql`
-  query goingQuery {
+export const allEventsQuery = graphql`
+  query allEventsQuery {
     allMarkdownRemark {
       edges {
         node {
-          id
           fields {
             slug
           }
           frontmatter {
             title
+            id
             featuredImage {
               childImageSharp {
                 fluid {

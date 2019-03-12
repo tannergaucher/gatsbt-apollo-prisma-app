@@ -1,6 +1,6 @@
 type Event {
   id: ID! @unique
-  nodeId: String!
+  postId: Int!
   user: User!
 }
 

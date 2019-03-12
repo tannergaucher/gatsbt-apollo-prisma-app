@@ -8,7 +8,6 @@ const MyLink = styled(Link)`
   color: black;
   text-transform: uppercase;
   font-weight: ${props => (props.active === 'active' ? 'bolder' : '')};
-  /* color: ${props => (props.active === 'active' ? 'blue' : 'black')}; */
 `
 
 export default MyLink

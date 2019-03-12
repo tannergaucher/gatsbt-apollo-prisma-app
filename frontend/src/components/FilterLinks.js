@@ -13,7 +13,6 @@ const FilterLinks = () => {
     <Styled>
       <FilterLink filter="All" />
       <FilterLink filter="Going" />
-      <FilterLink filter="Not Going" />
     </Styled>
   )
 }

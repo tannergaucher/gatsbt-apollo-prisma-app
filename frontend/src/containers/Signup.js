@@ -21,7 +21,7 @@ const SIGNUP_MUTATION = gql`
         id
         email
         events {
-          nodeId
+          postId
         }
       }
     }

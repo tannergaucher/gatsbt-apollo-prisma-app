@@ -54,15 +54,26 @@ const Mutation = {
     return { message: 'Goodbye' }
   },
 
-  addEvent: async (parent, { nodeId }, context) => {
+  addEvent: async (parent, { postId }, context) => {
     const userId = getUserId(context)
 
     if (!userId) {
       throw new AuthError()
     }
 
+    // check for existing event first
+    const [existingEvent] = await context.prisma.user({ id: userId }).events({
+      where: {
+        postId: postId,
+      },
+    })
+
+    if (existingEvent) {
+      throw new Error(`Already going to this event`)
+    }
+
     const event = await context.prisma.createEvent({
-      nodeId: nodeId,
+      postId: postId,
       user: {
         connect: {
           id: userId,
@@ -72,7 +83,8 @@ const Mutation = {
 
     return event
   },
-  removeEvent: async (parent, { nodeId }, context) => {
+
+  removeEvent: async (parent, { postId }, context) => {
     const userId = getUserId(context)
 
     if (!userId) {
@@ -81,7 +93,7 @@ const Mutation = {
 
     const [existingEvent] = await context.prisma.user({ id: userId }).events({
       where: {
-        nodeId: nodeId,
+        postId: postId,
       },
     })
 

@@ -1,8 +1,7 @@
 import { ApolloClient } from 'apollo-client'
 import { InMemoryCache } from 'apollo-cache-inmemory'
-
-import fetch from 'isomorphic-fetch'
 import { createHttpLink } from 'apollo-link-http'
+import fetch from 'isomorphic-fetch'
 
 import { resolvers, typeDefs } from './resolvers'
 
@@ -22,8 +21,5 @@ export const client = new ApolloClient({
 })
 
 cache.writeData({
-  data: {
-    // isLoggedIn: '',
-    userEvents: [],
-  },
+  data: {},
 })

@@ -10,7 +10,7 @@ const CURRENT_USER_QUERY = gql`
       email
       name
       events {
-        nodeId
+        postId
       }
     }
   }

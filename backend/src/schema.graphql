@@ -13,9 +13,8 @@ type Mutation {
   signup(email: String!, password: String!, name: String): AuthPayload!
   signin(email: String!, password: String!): AuthPayload!
   signout: SuccessMessage
-  # nodeId is created by gatsby
-  addEvent(nodeId: String!): Event
-  removeEvent(nodeId: String!): Event
+  addEvent(postId: Int!): Event
+  removeEvent(postId: Int!): Event
 }
 
 type AuthPayload {
@@ -24,8 +23,7 @@ type AuthPayload {
 }
 
 type Event {
-  # because id namespace is reserved for type ID, and event Id will come from CMS
-  nodeId: String!
+  postId: Int!
   users: [User!]
 }
 

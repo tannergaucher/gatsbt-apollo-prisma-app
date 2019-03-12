@@ -1,6 +1,7 @@
 ---
 title: 'Concert'
 featuredImage: './featured.jpg'
+id: 1
 ---
 
 Lorem ipsum dolor sit amet, et antiopam conceptam eam, vis at unum lobortis indoctum. Pro cu debet utroque nominati, porro iriure sea ad. Placerat sententiae et ius, eos in facilis offendit. Mea ea nullam appetere. Et etiam altera eos, veri tritani nostrum ea sea. Vim ludus tritani ne, an nemore aeterno vix, cu omnis brute has.

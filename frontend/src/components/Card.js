@@ -1,12 +1,18 @@
 import React from 'react'
+import Link from 'gatsby-link'
+import Img from 'gatsby-image'
 import styled from 'styled-components'
 
-import Img from 'gatsby-image'
+import User from '../containers/User'
+
+import RemoveEvent from '../containers/RemoveEvent'
+import AddEvent from '../containers/AddEvent'
 
 const Styled = styled.div`
   box-shadow: 0 2px 16px rgba(0, 0, 0, 0.25);
-  position: relative;
   border-radius: ${props => props.theme.radius};
+  margin-bottom: 4em;
+  position: relative;
 
   h2 {
     position: absolute;
@@ -14,24 +20,51 @@ const Styled = styled.div`
     padding-left: ${props => props.theme.spacing};
     color: white;
   }
+
+  .test {
+    position: absolute;
+    bottom: 5%;
+    right: 2%;
+  }
 `
 
-// card queries client state, displays going or isNotGoing
+const Image = styled(Img)`
+  height: 250px;
+  filter: brightness(0.8);
+  border-radius: ${props => props.theme.radius};
+`
 
-// default client state is  set to false
-
-const Card = ({ title, fluid }) => (
-  <Styled>
-    <h2>{title}</h2>
-    <Img
-      fluid={fluid}
-      style={{
-        height: '250px',
-        filter: 'brightness(.8)',
-        borderRadius: '4px',
-      }}
-    />
-  </Styled>
-)
+const Card = ({ title, fluid, postId, slug }) => {
+  return (
+    <Styled>
+      <Link to={slug}>
+        <h2>{title}</h2>
+        <Image fluid={fluid} />
+      </Link>
+      <div className="test">
+        <ToggledMutation postId={postId} />
+      </div>
+    </Styled>
+  )
+}
 
 export default Card
+
+const ToggledMutation = ({ postId }) => {
+  return (
+    <User>
+      {({ data, loading }) => {
+        if (loading) return null
+        if (!data.me) return null
+
+        //check if data.me.events includes postId
+        const { events } = data.me
+        const isGoing = events.filter(event => {
+          return event.postId === postId
+        })
+        // prettier-ignore
+        return isGoing.length > 0 ? <RemoveEvent  postId={postId}/> : <AddEvent postId={postId} />
+      }}
+    </User>
+  )
+}

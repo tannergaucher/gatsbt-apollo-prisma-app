@@ -149,8 +149,8 @@ export interface ClientConstructor<T> {
 export type EventOrderByInput =
   | "id_ASC"
   | "id_DESC"
-  | "nodeId_ASC"
-  | "nodeId_DESC"
+  | "postId_ASC"
+  | "postId_DESC"
   | "createdAt_ASC"
   | "createdAt_DESC"
   | "updatedAt_ASC"
@@ -191,20 +191,14 @@ export interface EventWhereInput {
   id_not_starts_with?: ID_Input;
   id_ends_with?: ID_Input;
   id_not_ends_with?: ID_Input;
-  nodeId?: String;
-  nodeId_not?: String;
-  nodeId_in?: String[] | String;
-  nodeId_not_in?: String[] | String;
-  nodeId_lt?: String;
-  nodeId_lte?: String;
-  nodeId_gt?: String;
-  nodeId_gte?: String;
-  nodeId_contains?: String;
-  nodeId_not_contains?: String;
-  nodeId_starts_with?: String;
-  nodeId_not_starts_with?: String;
-  nodeId_ends_with?: String;
-  nodeId_not_ends_with?: String;
+  postId?: Int;
+  postId_not?: Int;
+  postId_in?: Int[] | Int;
+  postId_not_in?: Int[] | Int;
+  postId_lt?: Int;
+  postId_lte?: Int;
+  postId_gt?: Int;
+  postId_gte?: Int;
   user?: UserWhereInput;
   AND?: EventWhereInput[] | EventWhereInput;
   OR?: EventWhereInput[] | EventWhereInput;
@@ -282,7 +276,7 @@ export type UserWhereUniqueInput = AtLeastOne<{
 }>;
 
 export interface EventCreateInput {
-  nodeId: String;
+  postId: Int;
   user: UserCreateOneWithoutEventsInput;
 }
 
@@ -298,7 +292,7 @@ export interface UserCreateWithoutEventsInput {
 }
 
 export interface EventUpdateInput {
-  nodeId?: String;
+  postId?: Int;
   user?: UserUpdateOneRequiredWithoutEventsInput;
 }
 
@@ -321,7 +315,7 @@ export interface UserUpsertWithoutEventsInput {
 }
 
 export interface EventUpdateManyMutationInput {
-  nodeId?: String;
+  postId?: Int;
 }
 
 export interface UserCreateInput {
@@ -337,7 +331,7 @@ export interface EventCreateManyWithoutUserInput {
 }
 
 export interface EventCreateWithoutUserInput {
-  nodeId: String;
+  postId: Int;
 }
 
 export interface UserUpdateInput {
@@ -371,7 +365,7 @@ export interface EventUpdateWithWhereUniqueWithoutUserInput {
 }
 
 export interface EventUpdateWithoutUserDataInput {
-  nodeId?: String;
+  postId?: Int;
 }
 
 export interface EventUpsertWithWhereUniqueWithoutUserInput {
@@ -395,20 +389,14 @@ export interface EventScalarWhereInput {
   id_not_starts_with?: ID_Input;
   id_ends_with?: ID_Input;
   id_not_ends_with?: ID_Input;
-  nodeId?: String;
-  nodeId_not?: String;
-  nodeId_in?: String[] | String;
-  nodeId_not_in?: String[] | String;
-  nodeId_lt?: String;
-  nodeId_lte?: String;
-  nodeId_gt?: String;
-  nodeId_gte?: String;
-  nodeId_contains?: String;
-  nodeId_not_contains?: String;
-  nodeId_starts_with?: String;
-  nodeId_not_starts_with?: String;
-  nodeId_ends_with?: String;
-  nodeId_not_ends_with?: String;
+  postId?: Int;
+  postId_not?: Int;
+  postId_in?: Int[] | Int;
+  postId_not_in?: Int[] | Int;
+  postId_lt?: Int;
+  postId_lte?: Int;
+  postId_gt?: Int;
+  postId_gte?: Int;
   AND?: EventScalarWhereInput[] | EventScalarWhereInput;
   OR?: EventScalarWhereInput[] | EventScalarWhereInput;
   NOT?: EventScalarWhereInput[] | EventScalarWhereInput;
@@ -420,7 +408,7 @@ export interface EventUpdateManyWithWhereNestedInput {
 }
 
 export interface EventUpdateManyDataInput {
-  nodeId?: String;
+  postId?: Int;
 }
 
 export interface UserUpdateManyMutationInput {
@@ -457,12 +445,12 @@ export interface NodeNode {
 
 export interface Event {
   id: ID_Output;
-  nodeId: String;
+  postId: Int;
 }
 
 export interface EventPromise extends Promise<Event>, Fragmentable {
   id: () => Promise<ID_Output>;
-  nodeId: () => Promise<String>;
+  postId: () => Promise<Int>;
   user: <T = UserPromise>() => T;
 }
 
@@ -470,7 +458,7 @@ export interface EventSubscription
   extends Promise<AsyncIterator<Event>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
-  nodeId: () => Promise<AsyncIterator<String>>;
+  postId: () => Promise<AsyncIterator<Int>>;
   user: <T = UserSubscription>() => T;
 }
 
@@ -693,21 +681,21 @@ export interface EventSubscriptionPayloadSubscription
 
 export interface EventPreviousValues {
   id: ID_Output;
-  nodeId: String;
+  postId: Int;
 }
 
 export interface EventPreviousValuesPromise
   extends Promise<EventPreviousValues>,
     Fragmentable {
   id: () => Promise<ID_Output>;
-  nodeId: () => Promise<String>;
+  postId: () => Promise<Int>;
 }
 
 export interface EventPreviousValuesSubscription
   extends Promise<AsyncIterator<EventPreviousValues>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
-  nodeId: () => Promise<AsyncIterator<String>>;
+  postId: () => Promise<AsyncIterator<Int>>;
 }
 
 export interface UserSubscriptionPayload {
@@ -767,14 +755,14 @@ export type ID_Input = string | number;
 export type ID_Output = string;
 
 /*
-The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.
-*/
-export type String = string;
-
-/*
 The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1. 
 */
 export type Int = number;
+
+/*
+The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.
+*/
+export type String = string;
 
 /*
 The `Boolean` scalar type represents `true` or `false`.

@@ -5,9 +5,9 @@ import FAB from '../components/styles/FAB'
 import { CURRENT_USER_QUERY } from '../containers/User'
 
 const ADD_EVENT_MUTATION = gql`
-  mutation ADD_EVENT_MUTATION($nodeId: String!) {
-    addEvent(nodeId: $nodeId) {
-      nodeId
+  mutation ADD_EVENT_MUTATION($postId: Int!) {
+    addEvent(postId: $postId) {
+      postId
     }
   }
 `
@@ -18,27 +18,22 @@ const update = (cache, payload) => {
   cache.writeQuery({ query: CURRENT_USER_QUERY, data })
 }
 
-const AddEvent = ({ nodeId }) => {
+const AddEvent = ({ postId }) => {
   return (
     <Mutation
       mutation={ADD_EVENT_MUTATION}
-      variables={{ nodeId }}
+      variables={{ postId }}
       update={update}
       optimisticResponse={{
         __typename: 'Mutation',
         addEvent: {
           __typename: 'Event',
-          nodeId: nodeId,
-          // gets replaced by actual id on server response
+          postId: postId,
           id: new Date(),
         },
       }}
     >
-      {addEvent => (
-        <FAB onClick={addEvent}>
-          <strong>&#43;</strong>
-        </FAB>
-      )}
+      {addEvent => <FAB onClick={addEvent}>&#43;</FAB>}
     </Mutation>
   )
 }

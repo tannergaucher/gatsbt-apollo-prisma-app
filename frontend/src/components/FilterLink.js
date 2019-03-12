@@ -7,9 +7,9 @@ import filterToUrl from '../utils/filterToUrl'
 const FilterLink = ({ filter }) => (
   <Link
     to={`/${filterToUrl(filter)}`}
-    // because using a boolean here throws a browser error 'recieved false for non-boolean attrubute
+    // because using a boolean here throws a browser error 'recieved false for non-boolean attribute
     active={isActiveLink(filter) ? 'active' : undefined}
-    style={{ margin: '0 1em' }}
+    style={{ margin: '0 .5em' }}
   >
     {filter}
   </Link>
