@@ -4,7 +4,6 @@ import Img from 'gatsby-image'
 import styled from 'styled-components'
 
 import User from '../containers/User'
-
 import RemoveEvent from '../containers/RemoveEvent'
 import AddEvent from '../containers/AddEvent'
 
@@ -57,7 +56,6 @@ const ToggledMutation = ({ postId }) => {
         if (loading) return null
         if (!data.me) return null
 
-        //check if data.me.events includes postId
         const { events } = data.me
         const isGoing = events.filter(event => {
           return event.postId === postId

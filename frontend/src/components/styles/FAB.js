@@ -7,12 +7,9 @@ const FAB = styled.button`
   height: 45px;
   width: 45px;
   border-radius: 50%;
-
-  background: rgba(0, 0, 0, 0.1);
-
+  background: rgba(0, 0, 0, 0.4);
   color: white;
-  border: 1px solid white;
-
+  border: 1px solid rgba(0, 0, 0, 0.2);
   box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.06);
   font-size: 24px;
   transition: 0.2s ease-in-out;
@@ -20,7 +17,7 @@ const FAB = styled.button`
 
   &:hover {
     transition: 0.2s ease-in-out;
-    transform: rotate(90deg) scale(1.2);
+    transform: scale(1.2);
   }
 
   &:focus {

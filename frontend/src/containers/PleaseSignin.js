@@ -1,9 +1,11 @@
 import React from 'react'
 import { Query } from 'react-apollo'
+import styled from 'styled-components'
+
 import { CURRENT_USER_QUERY } from './User'
 import Signin from './Signin'
 import Signup from './Signup'
-import styled from 'styled-components'
+import Loading from '../components/Loading'
 
 const Styled = styled.div`
   display: flex;
@@ -13,7 +15,7 @@ const Styled = styled.div`
 const PleaseSignin = props => (
   <Query query={CURRENT_USER_QUERY}>
     {({ data, loading }) => {
-      if (loading) return <p>Loading</p>
+      if (loading) return <Loading />
 
       if (!data.me) {
         return (

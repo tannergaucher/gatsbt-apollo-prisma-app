@@ -13,6 +13,7 @@ const FilterLinks = () => {
     <Styled>
       <FilterLink filter="All" />
       <FilterLink filter="Going" />
+      {/* Count here */}
     </Styled>
   )
 }

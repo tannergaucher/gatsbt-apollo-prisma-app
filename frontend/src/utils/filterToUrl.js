@@ -1,10 +1,7 @@
 import { kebabCase } from 'lodash'
 
 function filterToUrl(filter) {
-  if (filter === 'All') {
-    return ''
-  }
-  return kebabCase(filter)
+  return filter === `All` ? '' : kebabCase(filter)
 }
 
 export default filterToUrl
