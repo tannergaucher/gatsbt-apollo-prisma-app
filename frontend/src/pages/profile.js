@@ -1,36 +1,34 @@
 import React from 'react'
 import Layout from '../components/layout'
+import { ApolloConsumer } from 'react-apollo'
 
-import User from '../containers/User'
 import Signout from '../containers/Signout'
-import Signin from '../containers/Signin'
-import Signup from '../containers/Signup'
+import PleaseSignin from '../containers/PleaseSignin'
+import { CURRENT_USER_QUERY } from '../containers/User'
+import Centered from '../components/styles/Centered'
 
-const Auth = () => (
-  <>
-    <Signin />
-    <Signup />
-  </>
-)
+import { Heading } from 'rebass'
 
 const profile = () => (
   <Layout>
-    <User>
-      {({ data, loading }) => {
-        if (loading) return null
-        if (!data.me) return <Auth />
+    <PleaseSignin>
+      <ApolloConsumer>
+        {client => {
+          const data = client.readQuery({ query: CURRENT_USER_QUERY })
+          const { name, email } = data.me
 
-        const { name, email } = data.me
-
-        return (
-          <>
-            <h2>{name}</h2>
-            <h4>{email}</h4>
-            <Signout />
-          </>
-        )
-      }}
-    </User>
+          return (
+            <Centered>
+              <Heading fontSize={[4, 5]}>{name}</Heading>
+              <Heading m={5} fontSize={[2, 3]} fontWeight="lighter">
+                {email}
+              </Heading>
+              <Signout />
+            </Centered>
+          )
+        }}
+      </ApolloConsumer>
+    </PleaseSignin>
   </Layout>
 )
 

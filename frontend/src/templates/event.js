@@ -1,14 +1,16 @@
 import React from 'react'
 import { graphql } from 'gatsby'
 import Img from 'gatsby-image'
+import { Heading, Box } from 'rebass'
 
 import Layout from '../components/layout'
-import { Heading, Box } from 'rebass'
+import ToggleMutation from '../components/ToggleMutation'
 
 const event = ({ data }) => {
   const {
     frontmatter: {
       title,
+      id,
       featuredImage: {
         childImageSharp: { fluid },
       },
@@ -21,6 +23,8 @@ const event = ({ data }) => {
         {title}
       </Heading>
       <Img fluid={fluid} />
+
+      <ToggleMutation postId={id} />
 
       <Box
         fontSize={[3, 4]}
@@ -40,6 +44,7 @@ export const eventPageQuery = graphql`
       html
       frontmatter {
         title
+        id
         featuredImage {
           childImageSharp {
             fluid {

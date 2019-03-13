@@ -1,8 +1,8 @@
 import React from 'react'
 import { Mutation } from 'react-apollo'
 import gql from 'graphql-tag'
-import { Button } from 'rebass'
 import { navigate } from '@reach/router'
+import { Button } from 'rebass'
 
 import Error from '../components/Error'
 import Fieldset from '../components/styles/Fieldset'

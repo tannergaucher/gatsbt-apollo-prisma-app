@@ -12,23 +12,19 @@ const Styled = styled.div`
   justify-content: center;
 `
 
-const PleaseSignin = props => (
+const Auth = () => (
+  <Styled>
+    <Signin />
+    <Signup />
+  </Styled>
+)
+
+const PleaseSignin = ({ children }) => (
   <Query query={CURRENT_USER_QUERY}>
-    {({ data, loading }) => {
+    {({ data: { me }, loading }) => {
       if (loading) return <Loading />
 
-      if (!data.me) {
-        return (
-          <>
-            <Styled>
-              <Signin />
-              <Signup />
-            </Styled>
-          </>
-        )
-      }
-
-      return props.children
+      return !me ? <Auth /> : children
     }}
   </Query>
 )

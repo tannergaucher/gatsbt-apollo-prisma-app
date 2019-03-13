@@ -1,28 +1,24 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import Link from '../components/styles/Link'
+import FilterLinks from '../components/FilterLinks'
 
 const Styled = styled.nav`
+  position: absolute;
   display: flex;
-  justify-content: space-between;
-  background: #fafafa;
-  color: black;
-  box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.1);
+  justify-content: flex-start;
+  align-items: center;
   position: sticky;
   top: 0;
+  left: 0;
   z-index: 3;
   padding: 0 2em;
+  height: 62px;
 `
 
 const Nav = () => (
   <Styled>
-    <Link to="/" none="true">
-      <h4>Gatsby Apollo Prisma</h4>
-    </Link>
-    <Link to="/profile" none="true">
-      <h4>Profile</h4>
-    </Link>
+    <FilterLinks />
   </Styled>
 )
 

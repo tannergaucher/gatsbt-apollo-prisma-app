@@ -1,8 +1,9 @@
 import React from 'react'
 import { Mutation } from 'react-apollo'
 import gql from 'graphql-tag'
-import FAB from '../components/styles/FAB'
 import { CURRENT_USER_QUERY } from '../containers/User'
+
+import Button from '../components/styles/Button'
 
 const ADD_EVENT_MUTATION = gql`
   mutation ADD_EVENT_MUTATION($postId: Int!) {
@@ -33,7 +34,7 @@ const AddEvent = ({ postId }) => {
         },
       }}
     >
-      {addEvent => <FAB onClick={addEvent}>&#43;</FAB>}
+      {addEvent => <Button onClick={addEvent}>GO</Button>}
     </Mutation>
   )
 }

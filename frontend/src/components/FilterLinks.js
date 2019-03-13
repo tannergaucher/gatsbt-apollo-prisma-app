@@ -1,11 +1,10 @@
 import React from 'react'
-import FilterLink from '../components/FilterLink'
 import styled from 'styled-components'
+import FilterLink from '../components/FilterLink'
 
 const Styled = styled.div`
   display: flex;
-  justify-content: center;
-  margin-bottom: 2em;
+  flex-direction: column;
 `
 
 const FilterLinks = () => {
@@ -13,7 +12,7 @@ const FilterLinks = () => {
     <Styled>
       <FilterLink filter="All" />
       <FilterLink filter="Going" />
-      {/* Count here */}
+      <FilterLink filter="Profile" />
     </Styled>
   )
 }

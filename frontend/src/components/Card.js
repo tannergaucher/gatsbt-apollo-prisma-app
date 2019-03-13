@@ -2,34 +2,38 @@ import React from 'react'
 import Link from 'gatsby-link'
 import Img from 'gatsby-image'
 import styled from 'styled-components'
+import { Heading } from 'rebass'
 
-import User from '../containers/User'
-import RemoveEvent from '../containers/RemoveEvent'
-import AddEvent from '../containers/AddEvent'
+import ToggledMutation from '../components/ToggleMutation'
 
 const Styled = styled.div`
+  position: relative;
   box-shadow: 0 2px 16px rgba(0, 0, 0, 0.25);
   border-radius: ${props => props.theme.radius};
   margin-bottom: 4em;
-  position: relative;
 
-  h2 {
-    position: absolute;
-    z-index: 2;
-    padding-left: ${props => props.theme.spacing};
-    color: white;
+  &:last-child {
+    margin-bottom: 0;
   }
 
-  .test {
+  .title {
     position: absolute;
-    bottom: 5%;
-    right: 2%;
+    z-index: 2;
+    color: white;
+    top: 0.5em;
+    left: 0.5em;
+  }
+
+  .mutation {
+    position: absolute;
+    bottom: 0.5em;
+    right: 0.5em;
   }
 `
 
 const Image = styled(Img)`
   height: 250px;
-  filter: brightness(0.8);
+  filter: brightness(0.75);
   border-radius: ${props => props.theme.radius};
 `
 
@@ -37,10 +41,12 @@ const Card = ({ title, fluid, postId, slug }) => {
   return (
     <Styled>
       <Link to={slug}>
-        <h2>{title}</h2>
+        <Heading className="title" fontSize={5}>
+          {title}
+        </Heading>
         <Image fluid={fluid} />
       </Link>
-      <div className="test">
+      <div className="mutation">
         <ToggledMutation postId={postId} />
       </div>
     </Styled>
@@ -48,21 +54,3 @@ const Card = ({ title, fluid, postId, slug }) => {
 }
 
 export default Card
-
-const ToggledMutation = ({ postId }) => {
-  return (
-    <User>
-      {({ data, loading }) => {
-        if (loading) return null
-        if (!data.me) return null
-
-        const { events } = data.me
-        const isGoing = events.filter(event => {
-          return event.postId === postId
-        })
-        // prettier-ignore
-        return isGoing.length > 0 ? <RemoveEvent  postId={postId}/> : <AddEvent postId={postId} />
-      }}
-    </User>
-  )
-}

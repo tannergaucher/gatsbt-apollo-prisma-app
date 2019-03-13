@@ -5,6 +5,7 @@ import styled, { createGlobalStyle, ThemeProvider } from 'styled-components'
 import Nav from './Nav'
 
 const GlobalStyle = createGlobalStyle`
+
 body {
   margin: 0;
   padding: 0;
@@ -13,26 +14,28 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  min-height: 101vh;
 }
 `
 
 const theme = {
   spacing: '1em',
-  radius: '4px',
+  radius: '14px',
   black: 'black',
+  white: 'white',
 }
 
 const Main = styled.main`
   max-width: 42em;
-  margin: 0 auto;
-  padding: 2rem;
+  margin: 4em auto;
+  padding-left: ${props => props.theme.spacing};
+  padding-right: ${props => props.theme.spacing};
 `
 
 const Layout = ({ children }) => (
   <ThemeProvider theme={theme}>
     <>
       <GlobalStyle />
+
       <Nav />
       <Main>{children}</Main>
     </>

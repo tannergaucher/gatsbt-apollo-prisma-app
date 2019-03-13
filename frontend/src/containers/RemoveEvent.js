@@ -1,8 +1,9 @@
 import React from 'react'
 import { Mutation } from 'react-apollo'
 import gql from 'graphql-tag'
-import FAB from '../components/styles/FAB'
+
 import { CURRENT_USER_QUERY } from '../containers/User'
+import Button from '../components/styles/Button'
 
 const REMOVE_EVENT_MUTATION = gql`
   mutation REMOVE_EVENT_MUTATION($postId: Int!) {
@@ -33,7 +34,7 @@ const RemoveEvent = ({ postId }) => {
         },
       }}
     >
-      {removeEvent => <FAB onClick={removeEvent}>&#215;</FAB>}
+      {removeEvent => <Button onClick={removeEvent}>GOING</Button>}
     </Mutation>
   )
 }

@@ -2,7 +2,6 @@ import React from 'react'
 
 import Layout from '../components/layout'
 import Card from '../components/Card'
-import FilterLinks from '../components/FilterLinks'
 
 const IndexPage = ({
   data: {
@@ -10,7 +9,6 @@ const IndexPage = ({
   },
 }) => (
   <Layout>
-    <FilterLinks />
     {allEvents.map(edge => {
       const {
         node: {

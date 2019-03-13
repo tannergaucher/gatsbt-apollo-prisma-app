@@ -5,7 +5,6 @@ import Layout from '../components/layout'
 import User from '../containers/User'
 import PleaseSignin from '../containers/PleaseSignin'
 import Card from '../components/Card'
-import FilterLinks from '../components/FilterLinks'
 
 const going = ({
   data: {
@@ -35,7 +34,6 @@ const going = ({
 
           return (
             <>
-              <FilterLinks />
               {going.map(event => {
                 const {
                   fields: slug,
