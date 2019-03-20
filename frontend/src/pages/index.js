@@ -1,7 +1,9 @@
 import React from 'react'
+import styled from 'styled-components'
 
 import Layout from '../components/layout'
 import Card from '../components/Card'
+import Container from '../components/styles/Container'
 
 const IndexPage = ({
   data: {
@@ -9,22 +11,24 @@ const IndexPage = ({
   },
 }) => (
   <Layout>
-    {allEvents.map(edge => {
-      const {
-        node: {
-          frontmatter: {
-            title,
-            id,
-            featuredImage: {
-              childImageSharp: { fluid },
+    <Container>
+      {allEvents.map(edge => {
+        const {
+          node: {
+            frontmatter: {
+              title,
+              id,
+              featuredImage: {
+                childImageSharp: { fluid },
+              },
             },
+            fields: { slug },
           },
-          fields: { slug },
-        },
-      } = edge
-      // prettier-ignore
-      return <Card title={title} fluid={fluid} postId={id} slug={slug} key={id} />
-    })}
+        } = edge
+        // prettier-ignore
+        return <Card title={title} fluid={fluid} postId={id} slug={slug} key={id} />
+      })}
+    </Container>
   </Layout>
 )
 

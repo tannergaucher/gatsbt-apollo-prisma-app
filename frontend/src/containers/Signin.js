@@ -53,7 +53,6 @@ class Signin extends React.Component {
                 }}
               >
                 <Fieldset disabled={loading} aria-busy={loading}>
-                  <h1>Sign In</h1>
                   <Error error={error} />
 
                   <Input

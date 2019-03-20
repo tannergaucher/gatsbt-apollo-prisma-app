@@ -4,16 +4,21 @@ import styled from 'styled-components'
 import FilterLinks from '../components/FilterLinks'
 
 const Styled = styled.nav`
-  position: absolute;
+  grid-area: nav;
   display: flex;
-  justify-content: flex-start;
+  justify-content: flex-end;
   align-items: center;
   position: sticky;
   top: 0;
-  left: 0;
   z-index: 3;
-  padding: 0 2em;
-  height: 62px;
+  padding: ${props => props.theme.spacing} ${props => props.theme.spacing};
+
+  @media (max-width: 1000px) {
+    bottom: 0;
+    justify-content: center;
+    box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.2);
+    background: ${props => props.theme.white};
+  }
 `
 
 const Nav = () => (

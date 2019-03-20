@@ -48,21 +48,11 @@ class Signup extends React.Component {
               onSubmit={async e => {
                 e.preventDefault()
                 await signup()
-                // TODO change to last page from history
                 navigate('/')
               }}
             >
               <Fieldset disabled={loading} aria-busy={loading}>
                 <Error error={error} />
-                <h1>Sign up</h1>
-
-                <Input
-                  name="name"
-                  type="text"
-                  placeholder="name"
-                  value={this.state.name}
-                  onChange={this.handleChange}
-                />
 
                 <Input
                   name="email"
@@ -76,6 +66,13 @@ class Signup extends React.Component {
                   type="password"
                   placeholder="password"
                   value={this.state.password}
+                  onChange={this.handleChange}
+                />
+                <Input
+                  name="name"
+                  type="text"
+                  placeholder="name"
+                  value={this.state.name}
                   onChange={this.handleChange}
                 />
 

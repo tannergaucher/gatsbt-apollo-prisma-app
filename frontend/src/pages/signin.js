@@ -1,11 +1,22 @@
 import React from 'react'
-import Layout from '../components/layout'
+import { Flex } from 'rebass'
 
-import PleaseSignin from '../containers/PleaseSignin'
+import Centered from '../components/styles/Centered'
+import Layout from '../components/layout'
+import Link from '../components/styles/Link'
+import Signin from '../containers/Signin'
 
 const signin = () => (
   <Layout>
-    <PleaseSignin />
+    <Centered>
+      <Flex>
+        <h2>Sign In</h2>
+        <Link to="/signup">
+          <h2>Sign up</h2>
+        </Link>
+      </Flex>
+      <Signin />
+    </Centered>
   </Layout>
 )
 

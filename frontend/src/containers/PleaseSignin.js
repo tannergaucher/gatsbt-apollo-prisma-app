@@ -1,30 +1,34 @@
 import React from 'react'
 import { Query } from 'react-apollo'
-import styled from 'styled-components'
+import { Flex } from 'rebass'
 
 import { CURRENT_USER_QUERY } from './User'
 import Signin from './Signin'
-import Signup from './Signup'
 import Loading from '../components/Loading'
-
-const Styled = styled.div`
-  display: flex;
-  justify-content: center;
-`
+import Centered from '../components/styles/Centered'
+import Link from '../components/styles/Link'
 
 const Auth = () => (
-  <Styled>
+  <Centered>
+    <h1>Please Sign In</h1>
+    <Flex>
+      <h2>Sign In</h2>
+      <Link to="/signup">
+        <h2>Sign up</h2>
+      </Link>
+    </Flex>
     <Signin />
-    <Signup />
-  </Styled>
+  </Centered>
 )
 
 const PleaseSignin = ({ children }) => (
   <Query query={CURRENT_USER_QUERY}>
-    {({ data: { me }, loading }) => {
+    {({ data, loading }) => {
       if (loading) return <Loading />
 
-      return !me ? <Auth /> : children
+      const me = data ? data.me : null
+
+      return me ? children : <Auth />
     }}
   </Query>
 )

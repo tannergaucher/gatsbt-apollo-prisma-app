@@ -21,5 +21,7 @@ export const client = new ApolloClient({
 })
 
 cache.writeData({
-  data: {},
+  data: {
+    auth: 'Sign In',
+  },
 })

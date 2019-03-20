@@ -6,7 +6,6 @@ type SuccessMessage {
 
 type Query {
   me: User
-  events: [Event!]!
 }
 
 type Mutation {

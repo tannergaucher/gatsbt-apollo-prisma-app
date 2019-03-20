@@ -1,0 +1,5 @@
+- make breakpoints into themeprovider props
+- add icons to bar
+- add going count as icon badge
+- next post links
+- post spacing

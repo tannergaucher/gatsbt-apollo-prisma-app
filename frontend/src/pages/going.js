@@ -5,6 +5,7 @@ import Layout from '../components/layout'
 import User from '../containers/User'
 import PleaseSignin from '../containers/PleaseSignin'
 import Card from '../components/Card'
+import Container from '../components/styles/Container'
 
 const going = ({
   data: {
@@ -33,7 +34,7 @@ const going = ({
           })
 
           return (
-            <>
+            <Container>
               {going.map(event => {
                 const {
                   fields: slug,
@@ -48,7 +49,7 @@ const going = ({
                 // prettier-ignore
                 return  <Card title={title} fluid={fluid} postId={id} slug={slug.slug} key={id} />
               })}
-            </>
+            </Container>
           )
         }}
       </User>

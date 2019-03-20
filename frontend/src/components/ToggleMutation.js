@@ -8,12 +8,13 @@ const ToggledMutation = ({ postId }) => {
   return (
     <User>
       {({ data, loading }) => {
-        if (loading)
+        if (loading) {
           return (
             <Button disabled={true} color="lightgrey">
               GO
             </Button>
           )
+        }
         if (!data) return null
         if (!data.me) return null
 

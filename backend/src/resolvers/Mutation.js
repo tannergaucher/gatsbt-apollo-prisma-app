@@ -6,6 +6,11 @@ const { getUserId, AuthError } = require('../utils/getUserId')
 const Mutation = {
   signup: async (parent, { name, email, password }, context) => {
     const hashedPassword = await hash(password, 10)
+
+    const existingUser = await context.prisma.user({ email })
+
+    if (existingUser) throw new Error(`Account already exists for that email`)
+
     const user = await context.prisma.createUser({
       name,
       email,
@@ -48,12 +53,10 @@ const Mutation = {
       user,
     }
   },
-  signout: (parent, { id }, context) => {
+  signout: (parent, args, context) => {
     context.response.clearCookie('token')
-
     return { message: 'Goodbye' }
   },
-
   addEvent: async (parent, { postId }, context) => {
     const userId = getUserId(context)
 
@@ -61,7 +64,6 @@ const Mutation = {
       throw new AuthError()
     }
 
-    // check for existing event first
     const [existingEvent] = await context.prisma.user({ id: userId }).events({
       where: {
         postId: postId,
@@ -96,6 +98,10 @@ const Mutation = {
         postId: postId,
       },
     })
+
+    if (!existingEvent) {
+      throw new Error(`No event there`)
+    }
 
     return context.prisma.deleteEvent({
       id: existingEvent.id,
